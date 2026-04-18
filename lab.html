@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239B3D36'/><text x='16' y='22' font-family='DM Sans,sans-serif' font-size='13' font-weight='700' fill='white' text-anchor='middle'>MT</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In the Lab — Marcus Thuillier</title>
+  <meta name="description" content="Marcus Thuillier's personal ML projects and writing on data science and analytics." />
+  <meta property="og:title" content="In the Lab — Marcus Thuillier" />
+  <meta property="og:description" content="Personal ML projects — EloR international rugby rating system, published research — and writing on data science." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="career.html" class="nav-link">Career</a>
+        <a href="horizon.html" class="nav-link">Horizon Media</a>
+        <a href="intel.html" class="nav-link">Intel</a>
+        <a href="nyu.html" class="nav-link">NYU MBA</a>
+        <a href="northwestern.html" class="nav-link">Northwestern MLDS</a>
+        <a href="lab.html" class="nav-link active">In the Lab</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- BANNER -->
+  <!-- TODO: replace gradient with <img src="assets/banner-lab.jpg" alt="In the Lab"> when photo is ready -->
+  <div class="banner banner--inner banner--career"></div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-title">In the Lab</div>
+    <div class="page-subtitle">Personal ML projects and writing — built outside of hours, where I get to choose the question and own the full pipeline.</div>
+  </div>
+
+  <!-- AI PROJECTS -->
+  <div class="content-section">
+
+    <div class="section-heading fade-in">Projects</div>
+    <div class="section-subheading">Personal machine learning and analytics work</div>
+
+    <div class="ai-projects fade-in">
+
+      <div class="ai-project-card" style="grid-column: span 2;">
+        <div class="ai-project-label">Sports Analytics · Published Research · Interactive Dashboard</div>
+        <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/ELOR" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">EloR — International Rugby Rating System &amp; Analytics Dashboard ↗</a></div>
+        <div class="ai-project-desc">
+          A custom Elo-based rating system for international rugby union, built and published during the Northwestern MS programme. Processes 9,000+ international matches from 1890 to present — incorporating adaptive K-factors, home advantage corrections, and recency weighting to improve on existing world rankings. Produces pre-match win probabilities calibrated against market odds.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Extended into a Streamlit dashboard with six analytical views: current rankings, historical ELO trajectories, era dominance across five periods (pre-WW1 through modern), greatest upsets by upset probability, a live match predictor, and expected vs actual wins. Notable finding: New Zealand 2013 outperformed expected wins by 6.7 — the largest positive delta in the dataset.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          The methodology was <a href="https://sites.northwestern.edu/msia/2019/01/25/introducing-a-new-rating-system-for-world-rugby-union-based-on-the-elo-rating-system-the-elor-elo-rugby/" target="_blank" rel="noopener" class="inline-link">published on the Northwestern MSIA blog</a> in January 2019 and has since been referenced by analysts in the rugby analytics community — including the team at <a href="https://rugbyhawk.com" target="_blank" rel="noopener" class="inline-link">RugbyHawk ↗</a>.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Elo Ratings</span>
+          <span class="tag">Statistical Modeling</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Published Research</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">Sports Analytics · Predictive Modeling</div>
+        <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/Betting%20Model" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Super Rugby Match Prediction &amp; Spread Model ↗</a></div>
+        <div class="ai-project-desc">
+          End-to-end ML pipeline for Super Rugby match prediction covering 2015–2026. Features engineered on ELO differentials, form (5 &amp; 10-game win rates), momentum, head-to-head history, and competition weighting. Two models trained and calibrated — XGBoost and Logistic Regression — alongside a dedicated point spread prediction model.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Backtested against real bookmaker odds. Dashboard compares model predictions against market lines across calibration, spread accuracy, value bet identification, and simulated ROI curves at varying probability thresholds.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">Backtesting</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Feature Engineering</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">Computer Vision · Reinforcement Learning</div>
+        <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/Reinforcement%20Learning" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Rugby Game Analysis — CV &amp; RL Pipeline ↗</a></div>
+        <div class="ai-project-desc">
+          Six-stage pipeline processing match footage into structured game data. YOLOv8 detects players and ball frame-by-frame; K-means clusters jersey colours to auto-assign team membership; homography calibration maps pixel positions to field coordinates. Persistent player IDs are tracked across frames with velocity and possession computed between detections.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Labeled events — passes, carries, kicks, tries, turnovers — are used to assign rewards and train a PyTorch actor network for in-game decision classification.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">YOLOv8</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Reinforcement Learning</span>
+          <span class="tag">OpenCV</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>Marcus Thuillier · Data Scientist &amp; Product Analyst · New York</div>
+    <div class="footer-links">
+      <a href="mailto:marcus.thuillier@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/marcusthuillier" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/marcusthuillier" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="ai-built-note">© 2026 Marcus Thuillier</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

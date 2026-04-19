@@ -41,14 +41,13 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-title">In the Lab</div>
-    <div class="page-subtitle">Personal ML projects and writing — built outside of hours, where I get to choose the question and own the full pipeline.</div>
+    <div class="page-subtitle">Personal ML projects and writing.</div>
   </div>
 
   <!-- AI PROJECTS -->
   <div class="content-section">
 
     <div class="section-heading fade-in">Projects</div>
-    <div class="section-subheading">Personal machine learning and analytics work</div>
 
     <div class="ai-projects fade-in">
 
@@ -56,14 +55,25 @@
         <div class="ai-project-label">Sports Analytics · Published Research · Interactive Dashboard</div>
         <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/ELOR" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">EloR — International Rugby Rating System &amp; Analytics Dashboard ↗</a></div>
         <div class="ai-project-desc">
-          A custom Elo-based rating system for international rugby union, built and published during the Northwestern MS programme. Processes 9,000+ international matches from 1890 to present — incorporating adaptive K-factors, home advantage corrections, and recency weighting to improve on existing world rankings. Produces pre-match win probabilities calibrated against market odds.
+          Elo-based rating system for international rugby union. Processes 9,000+ international matches from 1890 to present with adaptive K-factors, home advantage corrections, and recency weighting. Produces pre-match win probabilities calibrated against market odds.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
-          Extended into a Streamlit dashboard with six analytical views: current rankings, historical ELO trajectories, era dominance across five periods (pre-WW1 through modern), greatest upsets by upset probability, a live match predictor, and expected vs actual wins. Notable finding: New Zealand 2013 outperformed expected wins by 6.7 — the largest positive delta in the dataset.
+          Extended into a Streamlit dashboard with six analytical views: current rankings, historical ELO trajectories, era dominance across five periods (pre-WW1 through modern), greatest upsets by upset probability, a live match predictor, and expected vs actual wins. Notable finding: New Zealand 2013 outperformed expected wins by 6.7.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
           The methodology was <a href="https://sites.northwestern.edu/msia/2019/01/25/introducing-a-new-rating-system-for-world-rugby-union-based-on-the-elo-rating-system-the-elor-elo-rugby/" target="_blank" rel="noopener" class="inline-link">published on the Northwestern MSIA blog</a> in January 2019 and has since been referenced by analysts in the rugby analytics community — including the team at <a href="https://rugbyhawk.com" target="_blank" rel="noopener" class="inline-link">RugbyHawk ↗</a>.
         </div>
+
+        <!-- Live ELO chart -->
+        <div class="elo-chart-wrap">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Current Top 10 — ELO Rankings</span>
+            <span class="elo-chart-source" id="eloSource">Loading…</span>
+          </div>
+          <canvas id="eloChart" height="220"></canvas>
+          <div class="elo-chart-error" id="eloError" style="display:none;">Could not load rankings data.</div>
+        </div>
+
         <div class="card-tags" style="margin-top:0.8rem;">
           <span class="tag">Python</span>
           <span class="tag">Elo Ratings</span>
@@ -78,11 +88,30 @@
         <div class="ai-project-label">Sports Analytics · Predictive Modeling</div>
         <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/Betting%20Model" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Super Rugby Match Prediction &amp; Spread Model ↗</a></div>
         <div class="ai-project-desc">
-          End-to-end ML pipeline for Super Rugby match prediction covering 2015–2026. Features engineered on ELO differentials, form (5 &amp; 10-game win rates), momentum, head-to-head history, and competition weighting. Two models trained and calibrated — XGBoost and Logistic Regression — alongside a dedicated point spread prediction model.
+          End-to-end ML pipeline for Super Rugby match prediction covering 2015–2026. Features engineered on ELO differentials, form (5 &amp; 10-game win rates), momentum, head-to-head history, and competition weighting. Two models trained and calibrated — XGBoost (selected) and Logistic Regression (baseline) — alongside a dedicated point spread prediction model.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
           Backtested against real bookmaker odds. Dashboard compares model predictions against market lines across calibration, spread accuracy, value bet identification, and simulated ROI curves at varying probability thresholds.
         </div>
+
+        <div class="elo-chart-wrap">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">XGBoost Feature Importance</span>
+            <span class="elo-chart-source" id="bettingSource">Loading…</span>
+          </div>
+          <canvas id="bettingChart" height="240"></canvas>
+          <div class="elo-chart-error" id="bettingError" style="display:none;">Could not load feature data.</div>
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">XGBoost vs ELO Baseline — Accuracy by Year</span>
+            <span class="elo-chart-source" id="accuracySource">Loading…</span>
+          </div>
+          <canvas id="accuracyChart" height="220"></canvas>
+          <div class="elo-chart-error" id="accuracyError" style="display:none;">Could not load accuracy data.</div>
+        </div>
+
         <div class="card-tags" style="margin-top:0.8rem;">
           <span class="tag">Python</span>
           <span class="tag">XGBoost</span>
@@ -102,6 +131,7 @@
         <div class="ai-project-desc" style="margin-top:0.6rem;">
           Labeled events — passes, carries, kicks, tries, turnovers — are used to assign rewards and train a PyTorch actor network for in-game decision classification.
         </div>
+
         <div class="card-tags" style="margin-top:0.8rem;">
           <span class="tag">Python</span>
           <span class="tag">YOLOv8</span>
@@ -127,5 +157,213 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script>
+  // ── Shared helpers ──────────────────────────────────────────────────────
+  var REPO = 'https://raw.githubusercontent.com/marcusthuillier/Rugby_Work/main/';
+
+  function parseCSV(text) {
+    var lines = text.trim().split('\n');
+    var headers = lines[0].split(',').map(function(h){ return h.trim(); });
+    return lines.slice(1).map(function(line) {
+      var vals = line.split(',');
+      var obj = {};
+      headers.forEach(function(h, i){ obj[h] = (vals[i] || '').trim(); });
+      return obj;
+    });
+  }
+
+  var chartDefaults = {
+    tip: {
+      backgroundColor: '#1c2a3a',
+      titleFont: { family: "'DM Sans', sans-serif", size: 11 },
+      bodyFont:  { family: "'DM Sans', sans-serif", size: 11 },
+      padding: 8
+    },
+    yTick: { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#3d5068' },
+    xTick: { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#6b7a8d' }
+  };
+
+  function hbar(id, labels, values, tooltipSuffix, xMin) {
+    return new Chart(document.getElementById(id), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: values.map(function(_, i){ return 'rgba(155,61,54,' + (0.22 - i * 0.012) + ')'; }),
+          borderColor: '#9B3D36',
+          borderWidth: 1.5,
+          borderRadius: 3,
+          hoverBackgroundColor: 'rgba(155,61,54,0.32)'
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  ' + (tooltipSuffix ? c.formattedValue + tooltipSuffix : c.formattedValue); } }
+          })
+        },
+        scales: {
+          x: {
+            min: xMin !== undefined ? xMin : undefined,
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: chartDefaults.xTick
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  }
+
+  function showError(errId, srcId, cvId) {
+    var el = document.getElementById(errId);
+    var src = document.getElementById(srcId);
+    var cv = document.getElementById(cvId);
+    if (el) el.style.display = 'block';
+    if (src) src.style.display = 'none';
+    if (cv) cv.style.display = 'none';
+  }
+
+  // ── ELO Rankings ────────────────────────────────────────────────────────
+  (function () {
+    var CSV_URL     = REPO + 'ELOR/Datasets/get_rank.csv';
+    var DATE_URL    = REPO + 'ELOR/last_updated.txt';
+
+    function parseRankCSV(text) {
+      var lines = text.trim().split('\n').slice(1);
+      return lines.map(function (line) {
+        var parts = line.split(',');
+        return { Team: parts[0].trim(), ELO: parseFloat(parts[1]) };
+      }).filter(function (d) { return !isNaN(d.ELO); });
+    }
+
+    function formatDate(iso) {
+      var d = new Date(iso + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    Promise.all([
+      fetch(CSV_URL).then(function(r){ if (!r.ok) throw new Error(); return r.text(); }),
+      fetch(DATE_URL).then(function(r){ return r.ok ? r.text() : null; }).catch(function(){ return null; })
+    ])
+      .then(function(results) {
+        var EXCLUDE = ['British & Irish Lions', 'New Zealand Maori', 'All Blacks XV'];
+        var rows  = parseRankCSV(results[0])
+          .filter(function(d){ return EXCLUDE.indexOf(d.Team) === -1; })
+          .slice(0, 10);
+        var teams = rows.map(function(d){ return d.Team; });
+        var elos  = rows.map(function(d){ return d.ELO; });
+        var minElo = Math.floor(Math.min.apply(null, elos) / 50) * 50 - 50;
+        var dateStr = results[1] ? results[1].trim() : null;
+        var label = dateStr
+          ? 'Updated to ' + formatDate(dateStr) + ' · github.com/marcusthuillier/Rugby_Work'
+          : 'Live · github.com/marcusthuillier/Rugby_Work';
+        document.getElementById('eloSource').textContent = label;
+        hbar('eloChart', teams, elos, null, minElo);
+      })
+      .catch(function(){ showError('eloError', 'eloSource', 'eloChart'); });
+  })();
+
+  // ── Betting Model — Feature Importance ──────────────────────────────────
+  (function () {
+    fetch(REPO + 'Betting%20Model/feature_importance.csv')
+      .then(function(r){ if (!r.ok) throw new Error(); return r.text(); })
+      .then(function(text) {
+        var rows = parseCSV(text).sort(function(a,b){ return parseFloat(b.Importance)-parseFloat(a.Importance); });
+        var labels = rows.map(function(d){
+          return d.Feature.replace(/_/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+        });
+        var values = rows.map(function(d){ return Math.round(parseFloat(d.Importance) * 1000) / 10; });
+        document.getElementById('bettingSource').textContent = 'Live · github.com/marcusthuillier/Rugby_Work';
+        hbar('bettingChart', labels, values, '%');
+      })
+      .catch(function(){ showError('bettingError', 'bettingSource', 'bettingChart'); });
+  })();
+
+  // ── Betting Model — Accuracy vs ELO ─────────────────────────────────────
+  (function () {
+    fetch(REPO + 'Betting%20Model/backtest_summary.csv')
+      .then(function(r){ if (!r.ok) throw new Error(); return r.text(); })
+      .then(function(text) {
+        var rows = parseCSV(text);
+        var years  = rows.map(function(d){ return d.Year; });
+        var xgbAcc = rows.map(function(d){ return Math.round(parseFloat(d.Accuracy)     * 1000) / 10; });
+        var lrAcc  = rows.map(function(d){ return Math.round(parseFloat(d.LR_Acc)       * 1000) / 10; });
+        var ensAcc = rows.map(function(d){ return Math.round(parseFloat(d.Ensemble_Acc) * 1000) / 10; });
+        var eloAcc = rows.map(function(d){ return Math.round(parseFloat(d.ELO_Acc)      * 1000) / 10; });
+
+        document.getElementById('accuracySource').textContent = 'Walk-forward backtest 2015–2025 · github.com/marcusthuillier/Rugby_Work';
+
+        new Chart(document.getElementById('accuracyChart'), {
+          type: 'bar',
+          data: {
+            labels: years,
+            datasets: [
+              {
+                label: 'XGBoost',
+                data: xgbAcc,
+                backgroundColor: 'rgba(155,61,54,0.75)',
+                borderColor: '#9B3D36',
+                borderWidth: 1.5,
+                borderRadius: 3
+              },
+              {
+                label: 'Logistic Regression',
+                data: lrAcc,
+                backgroundColor: 'rgba(155,61,54,0.38)',
+                borderColor: 'rgba(155,61,54,0.7)',
+                borderWidth: 1.5,
+                borderRadius: 3
+              },
+              {
+                label: 'Ensemble',
+                data: ensAcc,
+                backgroundColor: 'rgba(80,140,180,0.55)',
+                borderColor: 'rgba(80,140,180,0.9)',
+                borderWidth: 1.5,
+                borderRadius: 3
+              },
+              {
+                label: 'ELO Baseline',
+                data: eloAcc,
+                backgroundColor: 'rgba(120,130,140,0.35)',
+                borderColor: 'rgba(120,130,140,0.7)',
+                borderWidth: 1.5,
+                borderRadius: 3
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            animation: { duration: 900, easing: 'easeOutQuart' },
+            plugins: {
+              legend: {
+                display: true,
+                labels: { font: { family: "'DM Sans', sans-serif", size: 11 }, color: '#3d5068', boxWidth: 12 }
+              },
+              tooltip: Object.assign({}, chartDefaults.tip, {
+                callbacks: { label: function(c){ return '  ' + c.dataset.label + ': ' + c.formattedValue + '%'; } }
+              })
+            },
+            scales: {
+              x: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.xTick },
+              y: {
+                min: 60,
+                grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+                ticks: Object.assign({}, chartDefaults.yTick, { callback: function(v){ return v + '%'; } })
+              }
+            }
+          }
+        });
+      })
+      .catch(function(){ showError('accuracyError', 'accuracySource', 'accuracyChart'); });
+  })();
+
+  </script>
 </body>
 </html>

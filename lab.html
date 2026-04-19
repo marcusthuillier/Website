@@ -52,39 +52,6 @@
 
     <div class="ai-projects fade-in">
 
-      <div class="ai-project-card" style="grid-column: span 2;">
-        <div class="ai-project-label">Sports Analytics · Published Research · Interactive Dashboard</div>
-        <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/ELOR" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">EloR — International Rugby Rating System &amp; Analytics Dashboard ↗</a></div>
-        <div class="ai-project-desc">
-          Elo-based rating system for international rugby union. Processes 9,000+ international matches from 1890 to present with adaptive K-factors, home advantage corrections, and recency weighting. Produces pre-match win probabilities calibrated against market odds.
-        </div>
-        <div class="ai-project-desc" style="margin-top:0.6rem;">
-          Extended into a Streamlit dashboard with six analytical views: current rankings, historical ELO trajectories, era dominance across five periods (pre-WW1 through modern), greatest upsets by upset probability, a live match predictor, and expected vs actual wins. Notable finding: New Zealand 2013 outperformed expected wins by 6.7.
-        </div>
-        <div class="ai-project-desc" style="margin-top:0.6rem;">
-          The methodology was <a href="https://sites.northwestern.edu/msia/2019/01/25/introducing-a-new-rating-system-for-world-rugby-union-based-on-the-elo-rating-system-the-elor-elo-rugby/" target="_blank" rel="noopener" class="inline-link">published on the Northwestern MSIA blog</a> in January 2019 and has since been referenced by analysts in the rugby analytics community — including the team at <a href="https://rugbyhawk.com" target="_blank" rel="noopener" class="inline-link">RugbyHawk ↗</a>. <a href="https://medium.com/@marcus.thuillier/ranking-every-rugby-team-since-1893-a-data-driven-approach-e212d079a4b3" target="_blank" rel="noopener" class="inline-link">Read the full writeup →</a>
-        </div>
-
-        <!-- Live ELO chart -->
-        <div class="elo-chart-wrap">
-          <div class="elo-chart-header">
-            <span class="elo-chart-title">Current Top 10 — ELO Rankings</span>
-            <span class="elo-chart-source" id="eloSource">Loading…</span>
-          </div>
-          <canvas id="eloChart" height="220"></canvas>
-          <div class="elo-chart-error" id="eloError" style="display:none;">Could not load rankings data.</div>
-        </div>
-
-        <div class="card-tags" style="margin-top:0.8rem;">
-          <span class="tag">Python</span>
-          <span class="tag">Elo Ratings</span>
-          <span class="tag">Statistical Modeling</span>
-          <span class="tag">Streamlit</span>
-          <span class="tag">Plotly</span>
-          <span class="tag">Published Research</span>
-        </div>
-      </div>
-
       <!-- BETTING MODEL CARD — hidden until ready to publish
       <div class="ai-project-card">
         <div class="ai-project-label">Sports Analytics · Predictive Modeling</div>
@@ -124,6 +91,39 @@
         </div>
       </div>
       END BETTING MODEL CARD -->
+
+      <div class="ai-project-card" style="grid-column: span 2;">
+        <div class="ai-project-label">Sports Analytics · Published Research · Interactive Dashboard</div>
+        <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/ELOR" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">EloR — International Rugby Rating System &amp; Analytics Dashboard ↗</a></div>
+        <div class="ai-project-desc">
+          Elo-based rating system for international rugby union. Processes 9,000+ international matches from 1890 to present with adaptive K-factors, home advantage corrections, and recency weighting. Produces pre-match win probabilities calibrated against market odds.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Extended into a Streamlit dashboard with six analytical views: current rankings, historical ELO trajectories, era dominance across five periods (pre-WW1 through modern), greatest upsets by upset probability, a live match predictor, and expected vs actual wins. Notable finding: New Zealand 2013 outperformed expected wins by 6.7.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          The methodology was <a href="https://sites.northwestern.edu/msia/2019/01/25/introducing-a-new-rating-system-for-world-rugby-union-based-on-the-elo-rating-system-the-elor-elo-rugby/" target="_blank" rel="noopener" class="inline-link">published on the Northwestern MSIA blog</a> in January 2019 and has since been referenced by analysts in the rugby analytics community — including the team at <a href="https://rugbyhawk.com" target="_blank" rel="noopener" class="inline-link">RugbyHawk ↗</a>. <a href="https://medium.com/@marcus.thuillier/ranking-every-rugby-team-since-1893-a-data-driven-approach-e212d079a4b3" target="_blank" rel="noopener" class="inline-link">Read the full writeup →</a>
+        </div>
+
+        <!-- Live ELO chart -->
+        <div class="elo-chart-wrap">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Current Top 10 — ELO Rankings</span>
+            <span class="elo-chart-source" id="eloSource">Loading…</span>
+          </div>
+          <canvas id="eloChart" height="220"></canvas>
+          <div class="elo-chart-error" id="eloError" style="display:none;">Could not load rankings data.</div>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Elo Ratings</span>
+          <span class="tag">Statistical Modeling</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Published Research</span>
+        </div>
+      </div>
 
       <div class="ai-project-card">
         <div class="ai-project-label">Computer Vision · Reinforcement Learning</div>

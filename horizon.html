@@ -28,6 +28,7 @@
         <a href="nyu.html" class="nav-link">NYU MBA</a>
         <a href="northwestern.html" class="nav-link">Northwestern MLDS</a>
         <a href="lab.html" class="nav-link">In the Lab</a>
+        <a href="assets/cv.pdf" class="nav-link" download>CV ↓</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -83,49 +84,48 @@
         <div class="company-overline">01</div>
         <div class="contrib-title">Audience Framework — 43% YoY ROAS Improvement · 5M+ Incremental Reach</div>
         <div class="contrib-desc">Built audience framework for a national furniture retailer incorporating lookalike modelling and clustering to define high, mid, and low value customer tiers across new and refined segments. Achieved 43% YoY ROAS improvement, 5M+ incremental reach, and 9% ROAS outperformance versus non-product campaigns.</div>
-        <canvas id="h01Chart" height="70" style="margin-top:0.9rem;"></canvas>
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">02</div>
         <div class="contrib-title">Custom Bidding Strategy — 8% Higher True Reach · 30% More Qualified Prospects</div>
         <div class="contrib-desc">Implemented custom bidding strategy for a national furniture retailer by identifying key optimisation drivers — achieving 8% higher true reach and 30% more qualified prospects versus existing campaign benchmarks.</div>
-        <canvas id="h02Chart" height="70" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">03</div>
         <div class="contrib-title">blu. Product — 3–4× Revenue Per Impression Across 25–30 Client Organisations</div>
         <div class="contrib-desc">Engineered and productionised modelling and geolocation features into the blu. product, improving audience targeting and high-value geo identification. Drove 3–4× Revenue Per Impression improvement versus non-product campaigns across 25–30 client organisations, supported by technical documentation and training.</div>
-        <canvas id="h03Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">04</div>
         <div class="contrib-title">Audience Segmentation Framework — 10M+ Net-New Potential Customers</div>
         <div class="contrib-desc">Developed ML-derived audience segmentation framework incorporating growth tiers and lookalike models, uncovering 10+ million net-new potential customers for national brands.</div>
-        <canvas id="h04Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">05</div>
         <div class="contrib-title">Audience Spending &amp; Purchasing Report — 25+ Clients · Hundreds of Millions in Media Spend</div>
         <div class="contrib-desc">Built net-new audience spending and purchasing report benchmarking client customer behaviour against the general population to inform campaign planning across 25+ clients representing hundreds of millions in media spend.</div>
-        <canvas id="h05Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">06</div>
         <div class="contrib-title">Third-Party Data Integration — 5+ Client Requests Cleared in Two Weeks</div>
         <div class="contrib-desc">Self-initiated integration of third-party purchase and demographic data into audience products within two weeks, clearing 5+ pending client requests and accelerating campaign launch timelines.</div>
-        <canvas id="h06Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card" style="grid-column: span 2;">
         <div class="company-overline">07</div>
         <div class="contrib-title">AI-Assisted Development — 1–2 Day Turnarounds Cut to Hours</div>
         <div class="contrib-desc">Applied Claude Code across data engineering, feature development, QA, and UAT for AI/LLM-powered audience products — cutting 1–2 day turnarounds to a few hours, improving output completeness, and surfacing edge cases earlier.</div>
-        <canvas id="h07Chart" height="55" style="margin-top:0.9rem;max-width:480px;"></canvas>
+
       </div>
 
     </div>
@@ -157,62 +157,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-  <script>
-  (function () {
-    var accent = '#9B3D36';
-    var tip = {
-      backgroundColor: '#1c2a3a',
-      titleFont: { family: "'DM Sans', sans-serif", size: 11 },
-      bodyFont:  { family: "'DM Sans', sans-serif", size: 11 },
-      padding: 8
-    };
-    var yTick = { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#3d5068' };
-    var xTick = { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#6b7a8d' };
-
-    function hbar(id, labels, data, suffix, maxVal) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      new Chart(el, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            data: data,
-            backgroundColor: data.map(function(_, i) { return 'rgba(155,61,54,' + (0.14 - i * 0.03) + ')'; }),
-            borderColor: accent,
-            borderWidth: 1.5,
-            borderRadius: 3,
-            hoverBackgroundColor: 'rgba(155,61,54,0.24)'
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          animation: { duration: 800, easing: 'easeOutQuart' },
-          plugins: {
-            legend: { display: false },
-            tooltip: Object.assign({}, tip, {
-              callbacks: { label: function(c) { return '  ' + c.raw + suffix; } }
-            })
-          },
-          scales: {
-            x: { max: maxVal, grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
-              ticks: Object.assign({}, xTick, { callback: function(v) { return v + suffix; } }) },
-            y: { grid: { display: false }, border: { display: false }, ticks: yTick }
-          }
-        }
-      });
-    }
-
-    hbar('h01', ['ROAS Improvement', 'vs Benchmark'],      [43, 9],  '%', 52);
-    hbar('h02', ['Qualified Prospects', 'True Reach'],     [30, 8],  '%', 38);
-    hbar('h03', ['Revenue Per Impression (avg ×)'],        [3.5],    '×', 5);
-    hbar('h04', ['Net-New Customers (M)'],                 [10],     'M', 14);
-    hbar('h05', ['Client Organisations'],                  [25],     '+', 32);
-    hbar('h06', ['Client Requests Cleared (2 wks)'],       [5],      '+', 8);
-    hbar('h07', ['Turnaround: Before (days)', 'After (hrs)'], [1.5, 0.25], 'd/hr', 2);
-  })();
-  </script>
 </body>
 </html>

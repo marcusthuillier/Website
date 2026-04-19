@@ -141,6 +141,21 @@ document.querySelectorAll('.mini-metric-value, .stat-number').forEach(function(e
   counterObserver.observe(el);
 });
 
+// ── TIMELINE LOGO FALLBACKS ──
+(function () {
+  function makeFallback(img) {
+    var initials = (img.alt || '').trim().split(/\s+/).slice(0, 2).map(function (w) { return w[0]; }).join('');
+    var fb = document.createElement('div');
+    fb.className = 'timeline-logo timeline-logo--fallback';
+    fb.textContent = initials || '?';
+    if (img.parentNode) img.parentNode.replaceChild(fb, img);
+  }
+  document.querySelectorAll('.timeline-logo').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) makeFallback(img);
+    else img.addEventListener('error', function () { makeFallback(img); });
+  });
+})();
+
 // ── SCROLL ANIMATIONS ──
 const observer = new IntersectionObserver(function (entries) {
   entries.forEach(function (entry) {

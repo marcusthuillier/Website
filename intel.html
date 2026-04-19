@@ -28,6 +28,7 @@
         <a href="nyu.html" class="nav-link">NYU MBA</a>
         <a href="northwestern.html" class="nav-link">Northwestern MLDS</a>
         <a href="lab.html" class="nav-link">In the Lab</a>
+        <a href="assets/cv.pdf" class="nav-link" download>CV ↓</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -86,35 +87,36 @@
         <div class="contrib-title">NLP Contract Risk Assessment — $33M Annual Savings</div>
         <div class="contrib-desc">Built proprietary NLP algorithms to screen Intel's full vendor contract portfolio — 100,000+ contracts — for clause-level risk signals across multiple geographies. Reduced annual risk exposure by $33M and won the <a href="https://www.gartner.com/en/newsroom/press-releases/2020-06-16-gartner-announces-winners-of-the-2020-supply-chainnovator-awards" target="_blank" rel="noopener" class="inline-link">2020 Gartner High-Tech Chainnovator Prize</a>.</div>
         <div class="card-award" style="margin-top:0.75rem;"><a href="https://www.gartner.com/en/newsroom/press-releases/2020-06-16-gartner-announces-winners-of-the-2020-supply-chainnovator-awards" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">★ 2020 Gartner High-Tech Chainnovator Prize ↗</a></div>
-        <canvas id="i20Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">2021</div>
         <div class="contrib-title">LLM Contract Question-Answering Pipeline — 500+ Audit Hours Eliminated · 30% Coverage Expansion</div>
         <div class="contrib-desc">Constructed and delivered an automated contract question-answering pipeline built with an LLM — enabling legal and procurement teams to query any contract in plain English with no manual review. Eliminated 500+ audit hours and expanded programme coverage by 30%.</div>
-        <canvas id="i21Chart" height="70" style="margin-top:0.9rem;"></canvas>
+
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">2022</div>
         <div class="contrib-title">Supply Chain Fuzzy Matching — $7M in Procurement Savings</div>
         <div class="contrib-desc">Built fuzzy matching algorithms to consolidate millions of parts across supply chain datasets into a canonical supplier catalogue. Powered dashboards enabling supplier consolidation and pricing leverage — $7M in measurable procurement savings.</div>
-        <canvas id="i22Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card">
         <div class="company-overline">2023</div>
-        <div class="contrib-title">Parts Classification — Categorizing over 100,000 uncategerized parts</div>
+        <div class="contrib-title">Parts Classification — Categorizing over 100,000 uncategorized parts</div>
         <div class="contrib-desc">Released categorisation and matching models to production on Azure and Databricks — automating classification of tens of thousands of previously unclassified parts. Eliminated critical data gaps that had caused years of reporting inaccuracy.</div>
-        <canvas id="i23Chart" height="55" style="margin-top:0.9rem;"></canvas>
+
       </div>
 
       <div class="contrib-card" style="grid-column: span 2;">
         <div class="company-overline">2024</div>
         <div class="contrib-title">Spare Parts Demand Forecasting — 10% Error Reduction Across 100,000+ Parts</div>
         <div class="contrib-desc">Optimised time series forecasting model for spare parts utilisation through predictive feature engineering — achieving 10% error reduction across 100,000+ parts for manufacturing and data centre infrastructure. Reduced excess inventory, minimised equipment downtime, and enabled cross-region parts-to-machine matching.</div>
-        <canvas id="i24Chart" height="55" style="margin-top:0.9rem;max-width:480px;"></canvas>
+
       </div>
 
     </div>
@@ -146,60 +148,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
-  <script>
-  (function () {
-    var accent = '#9B3D36';
-    var tip = {
-      backgroundColor: '#1c2a3a',
-      titleFont: { family: "'DM Sans', sans-serif", size: 11 },
-      bodyFont:  { family: "'DM Sans', sans-serif", size: 11 },
-      padding: 8
-    };
-    var yTick = { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#3d5068' };
-    var xTick = { font: { family: "'DM Sans', sans-serif", size: 10 }, color: '#6b7a8d' };
-
-    function hbar(id, labels, data, suffix, maxVal) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      new Chart(el, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            data: data,
-            backgroundColor: data.map(function(_, i) { return 'rgba(155,61,54,' + (0.14 - i * 0.03) + ')'; }),
-            borderColor: accent,
-            borderWidth: 1.5,
-            borderRadius: 3,
-            hoverBackgroundColor: 'rgba(155,61,54,0.24)'
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          animation: { duration: 800, easing: 'easeOutQuart' },
-          plugins: {
-            legend: { display: false },
-            tooltip: Object.assign({}, tip, {
-              callbacks: { label: function(c) { return '  ' + c.raw + suffix; } }
-            })
-          },
-          scales: {
-            x: { max: maxVal, grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
-              ticks: Object.assign({}, xTick, { callback: function(v) { return v + suffix; } }) },
-            y: { grid: { display: false }, border: { display: false }, ticks: yTick }
-          }
-        }
-      });
-    }
-
-    hbar('i20', ['Annual Savings ($M)'],               [33],      'M',  40);
-    hbar('i21', ['Audit Hours Eliminated', 'Coverage Expansion (%)'], [500, 30], '', 550);
-    hbar('i22', ['Procurement Savings ($M)'],           [7],       'M',  10);
-    hbar('i23', ['Parts Classified (K)'],               [100],     'K+', 130);
-    hbar('i24', ['Forecast Error Reduction (%)'],       [10],      '%',  15);
-  })();
-  </script>
 </body>
 </html>

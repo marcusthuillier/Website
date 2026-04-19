@@ -1435,3 +1435,133 @@ body {
   outline-offset: 3px;
   border-radius: 3px;
 }
+
+/* ── TIMELINE ENHANCEMENTS ── */
+.timeline-logos {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: flex-end;
+  margin-bottom: 0.55rem;
+}
+.timeline-logos .timeline-logo { margin-bottom: 0; }
+
+.timeline-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.55rem;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+  background: var(--bg-card);
+  padding: 2px;
+  border: 1px solid var(--border-faint);
+}
+.timeline-item:hover .timeline-logo { opacity: 1; }
+
+.timeline-logo--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.timeline-type {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-align: right;
+  margin-top: 0.35rem;
+  padding-right: 1.9rem;
+}
+.timeline-type--work { color: var(--accent-light); }
+
+/* Pulse animation for the current (active) role dot */
+.timeline-dot--current {
+  border-color: var(--accent) !important;
+  background: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5.5px var(--accent-glow) !important;
+  animation: pulse-dot 2.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5.5px var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 3px var(--bg), 0 0 0 12px rgba(155,61,54,0);  }
+}
+
+/* ── ELO LIVE CHART ── */
+.elo-chart-wrap {
+  margin-top: 1.4rem;
+  padding: 1rem 1.2rem 0.6rem;
+  background: var(--bg);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+.elo-chart-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.elo-chart-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.elo-chart-source {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem;
+  color: var(--text-faint);
+}
+.elo-chart-error {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  padding: 1rem 0;
+  text-align: center;
+}
+
+/* ── TECH STACK ── */
+.tech-stack {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+.tech-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 0.5rem 1.2rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+.tech-row:last-child { border-bottom: none; }
+.tech-row-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.tech-row-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+@media (max-width: 640px) {
+  .timeline-logo { width: 26px; height: 26px; }
+  .timeline-type { padding-right: 0; }
+  .tech-stack { padding: 0 1.2rem 3rem; }
+  .tech-row { grid-template-columns: 1fr; gap: 0.35rem; }
+}

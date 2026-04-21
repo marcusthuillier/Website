@@ -1381,7 +1381,8 @@ body {
 
   .mini-metrics { grid-template-columns: repeat(2, 1fr); }
   .ai-projects { grid-template-columns: 1fr; }
-  .company-contrib-grid { grid-template-columns: 1fr; }
+  .company-contrib-grid { grid-template-columns: 1fr !important; }
+  .contrib-card { grid-column: auto !important; }
   .company-block { padding: 1.4rem 1.3rem; }
 }
 

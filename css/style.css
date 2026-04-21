@@ -1361,7 +1361,7 @@ body {
 
   .bento-section { padding: 2rem 1.5rem 1.5rem; }
   .bento-grid { grid-template-columns: 1fr 1fr; }
-  .bento-tile { grid-column: 1 / -1; }
+  .bento-tile { grid-column: 1 / -1 !important; }
   .bento-grid-2col { grid-template-columns: 1fr; }
 
   .teaser-section { padding: 1.5rem 1.5rem 2.5rem; }

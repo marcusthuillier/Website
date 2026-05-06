@@ -70,6 +70,19 @@
           <canvas id="nbaArchChart" height="260"></canvas>
         </div>
 
+        <div class="elo-chart-wrap" style="margin-top:1.2rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Stat Profile by Archetype</span>
+            <span class="elo-chart-source">Cluster means — USG%, AST%, REB%, TS%</span>
+          </div>
+          <div style="display:flex;gap:0.4rem;margin-bottom:0.7rem;">
+            <button class="nba-era-btn">Early 2000s</button>
+            <button class="nba-era-btn">Mid 2010s</button>
+            <button class="nba-era-btn">Modern</button>
+          </div>
+          <canvas id="nbaStatChart" height="240"></canvas>
+        </div>
+
         <div class="card-tags" style="margin-top:0.8rem;">
           <span class="tag">Python</span>
           <span class="tag">K-Means</span>
@@ -512,9 +525,8 @@
       { label: '3-and-D / Role Player',            data: [104, 179, 165], bg: 'rgba(155,61,54,0.72)' },
       { label: 'Ball-Dominant Playmaker',           data: [122, 104,  70], bg: 'rgba(76,114,176,0.68)' },
       { label: 'Glass Anchor / Traditional Center', data: [101,  80,  54], bg: 'rgba(90,150,90,0.65)'  },
-      { label: 'Scoring Big / Power Forward',       data: [ 96,  87,   0], bg: 'rgba(200,155,50,0.65)' },
-      { label: 'Pass-First Guard',                  data: [  0,   0, 104], bg: 'rgba(160,90,180,0.72)' },
-      { label: 'Versatile Big / Modern Forward',     data: [  0,   0, 101], bg: 'rgba(60,170,200,0.65)' }
+      { label: 'Scoring Big / Power Forward',       data: [ 96,  87, 101], bg: 'rgba(200,155,50,0.65)' },
+      { label: 'Pass-First Guard',                  data: [  0,   0, 104], bg: 'rgba(160,90,180,0.72)' }
     ];
 
     new Chart(document.getElementById('nbaArchChart'), {
@@ -545,6 +557,68 @@
         }
       }
     });
+  })();
+
+  // ── NBA Segmentation — Stat Profile by Archetype ──────────────────────────
+  (function () {
+    var arch4 = ['3-and-D / Role Player','Ball-Dominant Playmaker','Glass Anchor / Trad. Center','Scoring Big / Power Forward'];
+    var arch5 = ['3-and-D / Role Player','Ball-Dominant Playmaker','Glass Anchor / Trad. Center','Scoring Big / Power Forward','Pass-First Guard'];
+
+    var eraStats = [
+      { labels: arch4, usg: [16.4,20.8,14.9,21.0], ast: [11.8,24.1,6.2,10.2],  reb: [6.5,5.3,13.1,10.9], ts: [49.1,51.1,50.6,54.1] },
+      { labels: arch4, usg: [16.5,21.5,15.4,21.5], ast: [10.1,26.5,7.0,10.5],  reb: [6.6,5.5,14.4,12.1], ts: [51.8,51.2,55.4,53.3] },
+      { labels: arch5, usg: [15.7,26.7,14.7,18.0,18.4], ast: [10.9,26.0,10.8,11.2,20.6], reb: [6.6,8.0,16.0,11.7,6.4], ts: [57.0,58.3,62.8,58.0,52.5] }
+    ];
+
+    function makeDatasets(d) {
+      return [
+        { label: 'USG%', data: d.usg, backgroundColor: 'rgba(155,61,54,0.72)',  borderRadius: 2, borderWidth: 0 },
+        { label: 'AST%', data: d.ast, backgroundColor: 'rgba(76,114,176,0.68)', borderRadius: 2, borderWidth: 0 },
+        { label: 'REB%', data: d.reb, backgroundColor: 'rgba(90,150,90,0.65)',  borderRadius: 2, borderWidth: 0 },
+        { label: 'TS%',  data: d.ts,  backgroundColor: 'rgba(200,155,50,0.65)', borderRadius: 2, borderWidth: 0 }
+      ];
+    }
+
+    var statChart = new Chart(document.getElementById('nbaStatChart'), {
+      type: 'bar',
+      data: { labels: eraStats[2].labels, datasets: makeDatasets(eraStats[2]) },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        animation: { duration: 500, easing: 'easeOutQuart' },
+        plugins: {
+          legend: {
+            display: true, position: 'bottom',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 9 }, padding: 8, boxWidth: 10 }
+          },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  ' + c.dataset.label + ': ' + c.formattedValue + '%'; } }
+          })
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: Object.assign({}, chartDefaults.xTick, { callback: function(v){ return v + '%'; } })
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+
+    var btns = document.querySelectorAll('.nba-era-btn');
+    var ACTIVE = 'font-family:"DM Sans",sans-serif;font-size:10px;padding:3px 11px;border:1px solid #9B3D36;border-radius:20px;cursor:pointer;background:#9B3D36;color:#fff;';
+    var IDLE   = 'font-family:"DM Sans",sans-serif;font-size:10px;padding:3px 11px;border:1px solid #9B3D36;border-radius:20px;cursor:pointer;background:transparent;color:#9B3D36;';
+
+    function setEra(idx) {
+      btns.forEach(function(b, i){ b.style.cssText = i === idx ? ACTIVE : IDLE; });
+      var d = eraStats[idx];
+      statChart.data.labels = d.labels;
+      statChart.data.datasets = makeDatasets(d);
+      statChart.update();
+    }
+
+    btns.forEach(function(b, i){ b.addEventListener('click', function(){ setEra(i); }); });
+    setEra(2);
   })();
 
   </script>

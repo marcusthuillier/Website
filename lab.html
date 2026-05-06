@@ -53,6 +53,34 @@
     <div class="ai-projects fade-in">
 
       <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Customer Segmentation · Dimensionality Reduction</div>
+        <div class="ai-project-title">NBA Player Archetype Segmentation — Three Eras (2003–2026)</div>
+        <div class="ai-project-desc">
+          Do traditional basketball positions capture how players actually play — or are there natural statistical archetypes telling a different story? K-Means clustering on NBA advanced stats (USG%, AST%, REB%, TS%, and more) across three era windows, using the same behavioral segmentation techniques applied to customer data in marketing DS roles.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          K was selected independently per era using silhouette scoring. The modern era required K=5 — the model independently carved out a Pass-First Guard cluster (high AST, low USG) that didn't exist in either prior era. Chris Paul and Russell Westbrook land there. The math picked up the decline arc without being told to look for it. UMAP projections and radar profiles for each archetype are saved as interactive HTML and PNG outputs.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Player Archetype Distribution — Three Eras</span>
+            <span class="elo-chart-source">NBA Advanced Stats via nba_api · 2003–06, 2013–16, 2023–26</span>
+          </div>
+          <canvas id="nbaArchChart" height="260"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">K-Means</span>
+          <span class="tag">UMAP</span>
+          <span class="tag">PCA</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">nba_api</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
         <div class="ai-project-label">Sports Analytics · Predictive Modeling</div>
         <div class="ai-project-title"><a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/Betting%20Model" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Rugby Match Prediction Model ↗</a></div>
         <div class="ai-project-desc">
@@ -183,34 +211,6 @@
         </div>
       </div>
       -->
-
-      <div class="ai-project-card">
-        <div class="ai-project-label">Marketing Science · Customer Segmentation · Dimensionality Reduction</div>
-        <div class="ai-project-title">NBA Player Archetype Segmentation — Three Eras (2003–2026)</div>
-        <div class="ai-project-desc">
-          Do traditional basketball positions capture how players actually play — or are there natural statistical archetypes telling a different story? K-Means clustering on NBA advanced stats (USG%, AST%, REB%, TS%, and more) across three era windows, using the same behavioral segmentation techniques applied to customer data in marketing DS roles.
-        </div>
-        <div class="ai-project-desc" style="margin-top:0.6rem;">
-          K was selected independently per era using silhouette scoring. The modern era required K=5 — the model independently carved out a Pass-First Guard cluster (high AST, low USG) that didn't exist in either prior era. Chris Paul and Russell Westbrook land there. The math picked up the decline arc without being told to look for it. UMAP projections and radar profiles for each archetype are saved as interactive HTML and PNG outputs.
-        </div>
-
-        <div class="elo-chart-wrap" style="margin-top:1rem;">
-          <div class="elo-chart-header">
-            <span class="elo-chart-title">Player Archetype Distribution — Three Eras</span>
-            <span class="elo-chart-source">NBA Advanced Stats via nba_api · 2003–06, 2013–16, 2023–26</span>
-          </div>
-          <canvas id="nbaArchChart" height="260"></canvas>
-        </div>
-
-        <div class="card-tags" style="margin-top:0.8rem;">
-          <span class="tag">Python</span>
-          <span class="tag">K-Means</span>
-          <span class="tag">UMAP</span>
-          <span class="tag">PCA</span>
-          <span class="tag">Scikit-learn</span>
-          <span class="tag">nba_api</span>
-        </div>
-      </div>
 
     </div>
   </div>

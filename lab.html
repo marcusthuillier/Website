@@ -154,6 +154,64 @@
         </div>
       </div>
 
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Funnel Analysis · Statistical Testing</div>
+        <div class="ai-project-title">Premier League Fan Funnel — Instagram to Season Tickets (2023-24)</div>
+        <div class="ai-project-desc">
+          Where do sports fans drop off on their journey from digital follower to committed season ticket holder? A three-stage funnel built from citable published sources only: 20 clubs, Instagram following from official profiles, PL official attendance figures, and season ticket holder counts from Companies House annual reports. No proxies, no assumptions.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Instagram → STH conversion is strongly negatively correlated with follower count (Pearson r = −0.631, p = 0.003). Non-Big-Six clubs convert 9.2× more of their digital audience into season ticket holders than the Big Six. The gap is a supply constraint, not weak demand — Arsenal and Newcastle both have documented waitlists in the tens of thousands. Sheffield United converts 2.86% of Instagram followers into STH. Liverpool converts 0.07%. That's a 41× difference.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Instagram → Season Ticket Holder Conversion Rate (%)</span>
+            <span class="elo-chart-source">PL 2023-24 · Instagram profiles + Companies House annual reports · <span style="color:#9B3D36;">red</span> = Big Six</span>
+          </div>
+          <canvas id="funnelConvChart" height="420"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Funnel Analysis</span>
+          <span class="tag">Pearson Correlation</span>
+          <span class="tag">Chi-square</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+      -->
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Customer Segmentation · Dimensionality Reduction</div>
+        <div class="ai-project-title">NBA Player Archetype Segmentation — Three Eras (2003–2026)</div>
+        <div class="ai-project-desc">
+          Do traditional basketball positions capture how players actually play — or are there natural statistical archetypes telling a different story? K-Means clustering on NBA advanced stats (USG%, AST%, REB%, TS%, and more) across three era windows, using the same behavioral segmentation techniques applied to customer data in marketing DS roles.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          K was selected independently per era using silhouette scoring. The modern era required K=5 — the model independently carved out a Pass-First Guard cluster (high AST, low USG) that didn't exist in either prior era. Chris Paul and Russell Westbrook land there. The math picked up the decline arc without being told to look for it. UMAP projections and radar profiles for each archetype are saved as interactive HTML and PNG outputs.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Player Archetype Distribution — Three Eras</span>
+            <span class="elo-chart-source">NBA Advanced Stats via nba_api · 2003–06, 2013–16, 2023–26</span>
+          </div>
+          <canvas id="nbaArchChart" height="260"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">K-Means</span>
+          <span class="tag">UMAP</span>
+          <span class="tag">PCA</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">nba_api</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -387,6 +445,106 @@
         });
       })
       .catch(function(){ showError('accuracyError', 'accuracySource', 'accuracyChart'); });
+  })();
+
+  /*
+  // ── Fan Funnel — Instagram → STH Conversion (PL 2023-24) ─────────────────
+  (function () {
+    var clubs = [
+      'Liverpool','Man Utd','Chelsea','Arsenal','Man City',
+      'Spurs','West Ham','Aston Villa','Everton','Wolves',
+      'Bournemouth','Brighton','Newcastle','Crystal Palace',
+      'Fulham','Nottm Forest','Brentford','Luton','Burnley','Sheffield Utd'
+    ];
+    var values = [
+      0.0698, 0.0881, 0.1312, 0.1317, 0.1556,
+      0.1901, 0.5000, 0.6098, 0.6190, 0.7097,
+      0.8000, 0.8571, 0.9020, 1.0000,
+      1.1333, 1.2000, 1.4444, 1.8750, 2.0000, 2.8571
+    ];
+    var big6 = ['Arsenal','Chelsea','Man City','Man Utd','Liverpool','Spurs'];
+    var bgColors  = clubs.map(function(c){ return big6.indexOf(c) >= 0 ? 'rgba(155,61,54,0.72)' : 'rgba(76,114,176,0.60)'; });
+    var brdColors = clubs.map(function(c){ return big6.indexOf(c) >= 0 ? '#9B3D36' : '#4C72B0'; });
+
+    new Chart(document.getElementById('funnelConvChart'), {
+      type: 'bar',
+      data: {
+        labels: clubs,
+        datasets: [{
+          data: values,
+          backgroundColor: bgColors,
+          borderColor: brdColors,
+          borderWidth: 1.5,
+          borderRadius: 3
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: {
+              label: function(c){ return '  ' + c.formattedValue + '%'; },
+              afterLabel: function(c){
+                return big6.indexOf(c.label) >= 0 ? '  Supply-constrained — waitlist exists' : '';
+              }
+            }
+          })
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: Object.assign({}, chartDefaults.xTick, { callback: function(v){ return v + '%'; } })
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  })();
+  */
+
+  // ── NBA Segmentation — Archetype Distribution by Era ─────────────────────
+  (function () {
+    var eras = ['Early 2000s (2003–06)', 'Mid 2010s (2013–16)', 'Modern (2023–26)'];
+    var archetypes = [
+      { label: '3-and-D / Role Player',            data: [104, 179, 165], bg: 'rgba(155,61,54,0.72)' },
+      { label: 'Ball-Dominant Playmaker',           data: [122, 104,  70], bg: 'rgba(76,114,176,0.68)' },
+      { label: 'Glass Anchor / Traditional Center', data: [101,  80,  54], bg: 'rgba(90,150,90,0.65)'  },
+      { label: 'Scoring Big / Power Forward',       data: [ 96,  87,   0], bg: 'rgba(200,155,50,0.65)' },
+      { label: 'Pass-First Guard',                  data: [  0,   0, 104], bg: 'rgba(160,90,180,0.72)' },
+      { label: 'Rim Protector / Defensive Big',     data: [  0,   0, 101], bg: 'rgba(60,170,200,0.65)' }
+    ];
+
+    new Chart(document.getElementById('nbaArchChart'), {
+      type: 'bar',
+      data: {
+        labels: eras,
+        datasets: archetypes.map(function(a){
+          return { label: a.label, data: a.data, backgroundColor: a.bg, borderWidth: 0, borderRadius: 2 };
+        })
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 9 }, padding: 10, boxWidth: 12 }
+          },
+          tooltip: Object.assign({}, chartDefaults.tip)
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: {
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: chartDefaults.yTick
+          }
+        }
+      }
+    });
   })();
 
   </script>

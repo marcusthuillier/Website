@@ -53,13 +53,41 @@
     <div class="ai-projects fade-in">
 
       <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Funnel Analysis · Statistical Testing</div>
+        <div class="ai-project-title">Premier League Fan Funnel — Instagram to Season Tickets (2023-24)</div>
+        <div class="ai-project-desc">
+          Where do sports fans drop off on their journey from digital follower to committed season ticket holder? A three-stage funnel built from citable published sources only: 20 clubs, Instagram following from official profiles, PL official attendance figures, and season ticket holder counts from Companies House annual reports. No proxies, no assumptions.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Instagram to STH conversion is strongly negatively correlated with follower count (Pearson r = -0.631, p = 0.003). Non-Big-Six clubs convert 9.2x more of their digital audience into season ticket holders than the Big Six. The gap is a supply constraint, not weak demand. Sheffield United converts 2.86% of Instagram followers into STH. Liverpool converts 0.07%. That is a 41x difference. <a href="https://medium.com/@marcus.thuillier/which-premier-league-club-has-the-most-loyal-fans-i-built-a-marketing-funnel-to-find-out-d1b405e81cae" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Instagram to Season Ticket Holder Conversion Rate (%)</span>
+            <span class="elo-chart-source">PL 2023-24 · Instagram profiles + Companies House annual reports · <span style="color:#9B3D36;">red</span> = Big Six</span>
+          </div>
+          <canvas id="funnelConvChart" height="420"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Funnel Analysis</span>
+          <span class="tag">Pearson Correlation</span>
+          <span class="tag">Chi-square</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Customer Segmentation · Dimensionality Reduction</div>
         <div class="ai-project-title">NBA Player Archetype Segmentation — Three Eras (2003–2026)</div>
         <div class="ai-project-desc">
           Do traditional basketball positions capture how players actually play — or are there natural statistical archetypes telling a different story? K-Means clustering on NBA advanced stats (USG%, AST%, REB%, TS%, and more) across three era windows, using the same behavioral segmentation techniques applied to customer data in Marketing.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
-          K was selected independently per era using silhouette scoring. The modern era required K=5 — the model independently carved out a Pass-First Guard cluster (high AST, low USG) that didn't exist in either prior era. Find the breakdown below.
+          K was selected independently per era using silhouette scoring. The modern era required K=5 — the model independently carved out a Pass-First Guard cluster (high AST, low USG) that didn't exist in either prior era. Find the breakdown below. <a href="https://medium.com/@marcus.thuillier/how-nba-player-types-have-changed-over-20-years-a-data-science-approach-7093ebaf00a0" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
         </div>
 
         <div class="elo-chart-wrap" style="margin-top:1rem;">
@@ -210,33 +238,6 @@
         </div>
       </div>
 
-      <div class="ai-project-card">
-        <div class="ai-project-label">Marketing Science · Funnel Analysis · Statistical Testing</div>
-        <div class="ai-project-title">Premier League Fan Funnel — Instagram to Season Tickets (2023-24)</div>
-        <div class="ai-project-desc">
-          Where do sports fans drop off on their journey from digital follower to committed season ticket holder? A three-stage funnel built from citable published sources only: 20 clubs, Instagram following from official profiles, PL official attendance figures, and season ticket holder counts from Companies House annual reports. No proxies, no assumptions.
-        </div>
-        <div class="ai-project-desc" style="margin-top:0.6rem;">
-          Instagram to STH conversion is strongly negatively correlated with follower count (Pearson r = -0.631, p = 0.003). Non-Big-Six clubs convert 9.2x more of their digital audience into season ticket holders than the Big Six. The gap is a supply constraint, not weak demand. Sheffield United converts 2.86% of Instagram followers into STH. Liverpool converts 0.07%. That is a 41x difference.
-        </div>
-
-        <div class="elo-chart-wrap" style="margin-top:1rem;">
-          <div class="elo-chart-header">
-            <span class="elo-chart-title">Instagram to Season Ticket Holder Conversion Rate (%)</span>
-            <span class="elo-chart-source">PL 2023-24 · Instagram profiles + Companies House annual reports · <span style="color:#9B3D36;">red</span> = Big Six</span>
-          </div>
-          <canvas id="funnelConvChart" height="420"></canvas>
-        </div>
-
-        <div class="card-tags" style="margin-top:0.8rem;">
-          <span class="tag">Python</span>
-          <span class="tag">Funnel Analysis</span>
-          <span class="tag">Pearson Correlation</span>
-          <span class="tag">Chi-square</span>
-          <span class="tag">Plotly</span>
-          <span class="tag">Pandas</span>
-        </div>
-      </div>
 
     </div>
   </div>

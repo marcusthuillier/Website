@@ -52,6 +52,108 @@
 
     <div class="ai-projects fade-in">
 
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Propensity Modeling · Logistic Regression</div>
+        <div class="ai-project-title">World Cup Winner Propensity Model — 2026 Rankings (1990–2026)</div>
+        <div class="ai-project-desc">
+          Which teams have the profile of a World Cup winner? Binary classification applied to 35 years of World Cup data — the same technique marketing teams use to score leads. Train on historical converters. Score the current field. Rank by similarity to past winners. Nine positive labels in 240 team-tournament rows. 3.3% positive rate.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Train AUC 0.959. Test AUC 0.968 on the held-out 2022 field. Argentina ranked third at 15 percent in 2022. They won. Spain in 2026 ranks at 45 percent — the highest score since Spain themselves in 2010. <a href="MEDIUM_URL_06" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">2026 World Cup Winner Propensity Score (%)</span>
+            <span class="elo-chart-source">Logistic regression · 1990–2022 training set · martj42/international_results</span>
+          </div>
+          <canvas id="propensityChart" height="260"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">SHAP</span>
+          <span class="tag">Elo Ratings</span>
+          <span class="tag">Binary Classification</span>
+          <span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · LTV Modeling · Acquisition Channel Analysis</div>
+        <div class="ai-project-title">MLB Player LTV + CAC — Draft vs Free Agency vs Trade (1990–2015)</div>
+        <div class="ai-project-desc">
+          Can you predict a player's total career value from their first three seasons? Which acquisition channel offers the best LTV:CAC ratio? Gradient boosting regression applied to 25 years of MLB career data — the same payback curve logic used to evaluate paid acquisition channels in marketing.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Early-career WAR strongly predicts lifetime value. Draft picks return the highest LTV:CAC ratio across channels. The payback curve shows most players either earn back their cost within three seasons or never do. <a href="MEDIUM_URL_05" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Gradient Boosting</span>
+          <span class="tag">LTV Modeling</span>
+          <span class="tag">CAC Analysis</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Churn Modeling · XGBoost</div>
+        <div class="ai-project-title">NBA Player Churn Model — Predicting Rotation Exits (2000–2026)</div>
+        <div class="ai-project-desc">
+          Which NBA players are about to churn out of a team's rotation? XGBoost binary classifier trained on usage rate, age, contract year status, and performance trends — the same early warning signals used in customer churn models. SHAP explainability identifies which features drive each prediction.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          XGBoost outperforms logistic regression baseline. Minutes decline rate is the single strongest early warning signal — more predictive than age, position, or team record. <a href="MEDIUM_URL_04" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">SHAP</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">nba_api</span>
+          <span class="tag">Binary Classification</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Cohort Analysis · Survival Modelling</div>
+        <div class="ai-project-title">NBA Draft Class Cohort Analysis — 30 Years of Retention and LTV (1996–2026)</div>
+        <div class="ai-project-desc">
+          Every growth team builds the same table: users by signup month, % still active at month 1, 3, 6, 12. I built one for 30 years of NBA drafts. Each draft year is a cohort. Each career year is a time period. The cell value is the % of that class still playing meaningful minutes. Same logic, different labels.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          ANOVA across 23 cohorts is significant at p &lt; 0.001 — draft class differences are statistically real. Average retention drops to 49% by career year 5 and 30% by year 10. Top-5 picks reach year 10 at 2.8x the rate of second-rounders (55.7% vs 19.9%). The 2003 class — LeBron, Carmelo, Wade, Bosh — is a genuine outlier at 1.4x the 19-class average LTV. <a href="MEDIUM_URL_03" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">LTV per Player by Draft Class — Career-Complete Classes (1996–2014)</span>
+            <span class="elo-chart-source">NBA Advanced Stats via nba_api · Career-complete classes only · Dashed line = 19-class average</span>
+          </div>
+          <canvas id="cohortLtvChart" height="220"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Cohort Analysis</span>
+          <span class="tag">Survival Analysis</span>
+          <span class="tag">ANOVA</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">nba_api</span>
+        </div>
+      </div>
+      -->
+
       <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Funnel Analysis · Statistical Testing</div>
         <div class="ai-project-title">Premier League Fan Funnel — Instagram to Season Tickets (2023-24)</div>
@@ -634,6 +736,80 @@
       });
     });
   })();
+
+  /* ── World Cup Propensity Model — 2026 Rankings ────────────────────────────
+  (function () {
+    var teams  = ['Spain','Brazil','Germany','England','Belgium','France','Netherlands','Mexico','Argentina','Portugal'];
+    var scores = [45.4, 27.2, 13.6, 12.0, 9.0, 6.2, 5.3, 4.3, 3.7, 3.3];
+    hbar('propensityChart', teams, scores, '%');
+  })();
+  */ // end propensity chart comment
+
+  /* ── Cohort Analysis — LTV per Draft Class (1996–2014) ────────────────────
+  (function () {
+    var years = ['1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'];
+    var ltv   = [158.41,120.87,138.52,148.28,96.20,146.83,107.38,177.25,143.88,138.94,98.63,136.48,154.60,141.87,115.08,135.58,105.08,105.86,102.74];
+    var avg   = 130.1;
+
+    var bg  = years.map(function(y){ return y === '2003' ? 'rgba(155,61,54,0.80)' : 'rgba(76,114,176,0.52)'; });
+    var brd = years.map(function(y){ return y === '2003' ? '#9B3D36' : 'rgba(76,114,176,0.85)'; });
+
+    new Chart(document.getElementById('cohortLtvChart'), {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'LTV per Player',
+            data: ltv,
+            backgroundColor: bg,
+            borderColor: brd,
+            borderWidth: 1.5,
+            borderRadius: 3
+          },
+          {
+            label: '19-class average (130)',
+            data: years.map(function(){ return avg; }),
+            type: 'line',
+            borderColor: 'rgba(120,130,140,0.65)',
+            borderWidth: 1.5,
+            borderDash: [5, 4],
+            pointRadius: 0,
+            fill: false,
+            tension: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 9 }, padding: 10, boxWidth: 12 }
+          },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: {
+              label: function(c){
+                if (c.dataset.type === 'line') return '  19-class avg: ' + avg;
+                return '  LTV: ' + c.formattedValue;
+              }
+            }
+          })
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: {
+            min: 70,
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: chartDefaults.yTick
+          }
+        }
+      }
+    });
+  })();
+  */ // end cohort chart comment
 
   </script>
 </body>

@@ -52,6 +52,126 @@
 
     <div class="ai-projects fade-in">
 
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Sentiment Analysis · Event Study</div>
+        <div class="ai-project-title">Sentiment vs Volume — The Luka Dončić Trade (Feb 2025)</div>
+        <div class="ai-project-desc">
+          One of the most shocking trades in NBA history. Did media sentiment swing as hard as the story did? Daily Google News headlines for "Luka Doncic," a week before to two weeks after the trade, scored with VADER. 1,211 headlines. The same before/after read a comms team runs on a major announcement.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Volume baseline before the trade: 9.1 headlines/day. Trade-day volume: 100 — the query cap, so the real spike was larger, and coverage stayed pinned near that ceiling for four straight days. Mean sentiment before: 0.042. After: 0.057. Welch's t-test p = 0.72 — not significant. The story exploded. The tone never moved.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Daily Headline Volume vs Sentiment — "Luka Doncic" News</span>
+            <span class="elo-chart-source">Google News RSS · VADER sentiment · dashed line = trade announced Feb 1, 2025</span>
+          </div>
+          <canvas id="sentimentVolumeChart" height="260"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">VADER</span>
+          <span class="tag">Sentiment Analysis</span>
+          <span class="tag">Event Study</span>
+          <span class="tag">Welch's t-test</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Survival Analysis · Cox Regression</div>
+        <div class="ai-project-title">NBA Career Survival Analysis — When Do Players Decline? (1996–2025)</div>
+        <div class="ai-project-desc">
+          At what point in a career does decline become irreversible — and does it depend on position? Kaplan-Meier survival curves plus Cox Proportional Hazard regression on 1,757 NBA careers, 1996–2025. The same technique used to model customer churn timing, applied to careers instead of subscriptions.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Median career: 6.0 seasons. Position doesn't predict survival (log-rank p = 0.083) — power forwards actually last longest. One feature does: peak performance. Hazard ratio 0.273. Every standard deviation of peak performance cuts churn risk 73 percent. Draft position and height: irrelevant once you're in the league. Model concordance 0.82.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Cox Hazard Ratios — What Predicts Career Survival</span>
+            <span class="elo-chart-source">lifelines Cox PH model · 1,757 players · 1996–2025 · &lt;1.0 = lower churn risk</span>
+          </div>
+          <canvas id="survivalHRChart" height="220"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Survival Analysis</span>
+          <span class="tag">Kaplan-Meier</span>
+          <span class="tag">Cox Regression</span>
+          <span class="tag">lifelines</span>
+          <span class="tag">nba_api</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Forecasting · Time Series</div>
+        <div class="ai-project-title">NBA Standings Forecasting — Baseline vs ARIMA (2014–2024)</div>
+        <div class="ai-project-desc">
+          Given mid-season data, which model better predicts a team's final win total — a dumb pace extrapolation, or a real time series model? 240 team-seasons across 8 full 82-game NBA seasons, forecast from the halfway point. The same horse race growth and marketing teams run before committing a quarterly forecast.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          The baseline wins on every metric. RMSE 4.97 wins vs ARIMA's 8.29. ARIMA only beats the baseline in 35.8% of team-seasons, and its worst misses cluster around real mid-season inflections — trades, injury returns — exactly where a "smarter" model is supposed to help most. It doesn't.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Forecast Error — Baseline vs ARIMA (RMSE, Final Win Total)</span>
+            <span class="elo-chart-source">240 team-seasons · 2014-15 to 2023-24, shortened seasons excluded</span>
+          </div>
+          <canvas id="forecastErrorChart" height="200"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">ARIMA</span>
+          <span class="tag">Time Series</span>
+          <span class="tag">Statsmodels</span>
+          <span class="tag">nba_api</span>
+          <span class="tag">Forecasting</span>
+        </div>
+      </div>
+      -->
+
+      <!--
+      <div class="ai-project-card">
+        <div class="ai-project-label">Product DS · Recommender Systems · Similarity Search</div>
+        <div class="ai-project-title">Player Similarity Recommender — Premier League 2024-25</div>
+        <div class="ai-project-desc">
+          Can a "players like this" recommender find statistically similar players without ever being told what position they play? Cosine similarity on 11 per-90 stat features, indexed with FAISS, across 321 Premier League players (2024-25, 900+ minutes). Same architecture as "customers like this one" in marketing personalization.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Validation check passed cleanly: Virgil van Dijk's top 5 matches are all center-backs, no position label ever fed to the model. Erling Haaland's closest match is a tier below him — nobody in the league actually plays like him. Kevin De Bruyne's matches skew toward wingers, exposing a real gap: the feature set has no passing data, so the model can't see his actual game.
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Virgil van Dijk — Top 5 Most Similar Players</span>
+            <span class="elo-chart-source">Cosine similarity, FAISS · validation check: all 5 matches are center-backs</span>
+          </div>
+          <canvas id="similarityChart" height="220"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">FAISS</span>
+          <span class="tag">Cosine Similarity</span>
+          <span class="tag">FBref</span>
+          <span class="tag">PCA</span>
+          <span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+      -->
+
       <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Propensity Modeling · Logistic Regression</div>
         <div class="ai-project-title">World Cup Winner Propensity Model — 2026 Rankings (1990–2026)</div>
@@ -728,6 +848,121 @@
       });
     });
   })();
+
+  /* ── Doncic Trade — Sentiment vs Volume Timeline ───────────────────────────
+  (function () {
+    var dates = ['Jan 25','Jan 26','Jan 27','Jan 28','Jan 29','Jan 30','Jan 31',
+                 'Feb 1','Feb 2','Feb 3','Feb 4','Feb 5','Feb 6','Feb 7','Feb 8',
+                 'Feb 9','Feb 10','Feb 11','Feb 12','Feb 13','Feb 14','Feb 15'];
+    var volume    = [6,4,6,5,6,9,28,100,100,100,100,75,85,62,59,100,100,100,69,40,30,27];
+    var sentiment = [0.177,-0.288,-0.153,0.046,-0.164,-0.038,0.171,0.074,0.039,0.049,0.083,0.092,0.083,-0.061,-0.103,0.025,0.152,0.181,0.046,0.008,0.001,-0.078];
+    var tradeIdx = 7; // Feb 1
+
+    new Chart(document.getElementById('sentimentVolumeChart'), {
+      data: {
+        labels: dates,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Headline Volume',
+            data: volume,
+            backgroundColor: dates.map(function(_, i){ return i >= tradeIdx ? 'rgba(155,61,54,0.55)' : 'rgba(76,114,176,0.55)'; }),
+            yAxisID: 'yVolume',
+            borderWidth: 0,
+            borderRadius: 2
+          },
+          {
+            type: 'line',
+            label: 'Mean Sentiment (VADER)',
+            data: sentiment,
+            borderColor: '#222',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            pointRadius: 2,
+            yAxisID: 'ySentiment',
+            tension: 0.25
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { family: "'DM Sans', sans-serif", size: 9 }, padding: 10, boxWidth: 12 } },
+          tooltip: Object.assign({}, chartDefaults.tip)
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: Object.assign({}, chartDefaults.xTick, { maxRotation: 45, minRotation: 45 }) },
+          yVolume: {
+            position: 'left',
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: chartDefaults.yTick,
+            title: { display: true, text: 'Headlines/day', font: { family: "'DM Sans', sans-serif", size: 9 } }
+          },
+          ySentiment: {
+            position: 'right',
+            min: -0.4, max: 0.4,
+            grid: { display: false }, border: { display: false },
+            ticks: chartDefaults.yTick,
+            title: { display: true, text: 'Mean sentiment', font: { family: "'DM Sans', sans-serif", size: 9 } }
+          }
+        }
+      }
+    });
+  })();
+  */ // end sentiment/volume chart comment
+
+  /* ── NBA Career Survival — Cox Hazard Ratios ───────────────────────────────
+  (function () {
+    var labels = ['Peak Performance (std)', 'Height', 'Draft Pick'];
+    var values = [0.273, 0.989, 1.000];
+    hbar('survivalHRChart', labels, values, null, 0);
+  })();
+  */ // end survival HR chart comment
+
+  /* ── NBA Standings Forecasting — Baseline vs ARIMA RMSE ────────────────────
+  (function () {
+    new Chart(document.getElementById('forecastErrorChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Baseline (pace extrapolation)', 'ARIMA'],
+        datasets: [{
+          data: [4.97, 8.29],
+          backgroundColor: ['rgba(76,114,176,0.72)', 'rgba(155,61,54,0.72)'],
+          borderColor: ['#4C72B0', '#9B3D36'],
+          borderWidth: 1.5,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  RMSE: ' + c.formattedValue + ' wins'; } }
+          })
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: Object.assign({}, chartDefaults.xTick, { callback: function(v){ return v + ' wins'; } })
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  })();
+  */ // end forecast error chart comment
+
+  /* ── Player Similarity Recommender — van Dijk top 5 ────────────────────────
+  (function () {
+    var labels = ['Luke Woolfenden', 'Ethan Pinnock', 'Matthijs de Ligt', 'Joachim Andersen', 'Leny Yoro'];
+    var values = [0.956, 0.929, 0.922, 0.905, 0.904];
+    hbar('similarityChart', labels, values, null, 0.85);
+  })();
+  */ // end similarity chart comment
 
   // ── World Cup Propensity Model — 2026 Rankings ────────────────────────────
   (function () {

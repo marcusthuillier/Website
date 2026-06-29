@@ -54,28 +54,28 @@
 
       <!--
       <div class="ai-project-card">
-        <div class="ai-project-label">Marketing Science · Sentiment Analysis · Event Study</div>
-        <div class="ai-project-title">Sentiment vs Volume — The Luka Dončić Trade (Feb 2025)</div>
+        <div class="ai-project-label">Marketing Science · Sentiment Analysis · Stacked Event Study</div>
+        <div class="ai-project-title">Sentiment Around Shocking NBA Trades — A Stacked Event Study</div>
         <div class="ai-project-desc">
-          One of the most shocking trades in NBA history. Did media sentiment swing as hard as the story did? Daily Google News headlines for "Luka Doncic," 30 days before to two weeks after the trade, scored two ways: VADER (lexicon-based) and DistilBERT (a transformer model). 1,289 headlines. The same before/after read a comms team runs on a major announcement.
+          Does a major trade reliably shift media sentiment, or does it just look that way for any one event? Daily Google News headlines for 3 major in-season trades — Luka Doncic to the Lakers, Kevin Durant to the Suns, James Harden to the Nets — scored with VADER and DistilBERT, compared before vs. after each trade individually and pooled. 3,204 headlines total.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
-          A first pass with only a 7-day pre-trade window made DistilBERT look like it had found a real effect (p = 0.13) that VADER missed. Widening the baseline to 30 days, a basic robustness check, more than tripled the pre-trade sample and the effect mostly vanished (p = 0.54). The headline-grabbing result was a narrow-window artifact, not a real finding — and that's worth reporting as plainly as the original would have been.
+          Doncic alone: not significant. Durant alone: not significant. Harden alone: massive, p &lt; 0.0001 — DistilBERT swings from -0.23 (trade-demand drama) to +0.22 (superteam analysis) the moment the trade happened. Pooled across all 3, the effect is real for both methods (VADER p=0.0025, DistilBERT p&lt;0.0001). A single event didn't have the power to show what three, stacked, clearly do.
         </div>
 
         <div class="elo-chart-wrap" style="margin-top:1rem;">
           <div class="elo-chart-header">
-            <span class="elo-chart-title">Daily Headline Volume vs Sentiment — "Luka Doncic" News</span>
-            <span class="elo-chart-source">Google News RSS · VADER + DistilBERT sentiment · 30-day pre-trade window · dashed line = trade announced Feb 1, 2025</span>
+            <span class="elo-chart-title">Pooled Before/After Sentiment Across 3 Trades</span>
+            <span class="elo-chart-source">Google News RSS · VADER + DistilBERT · Doncic, Durant, Harden, pooled · error bars = SEM</span>
           </div>
-          <canvas id="sentimentVolumeChart" height="260"></canvas>
+          <canvas id="pooledSentimentChart" height="240"></canvas>
         </div>
 
         <div class="card-tags" style="margin-top:0.8rem;">
           <span class="tag">Python</span>
           <span class="tag">VADER</span>
-          <span class="tag">Sentiment Analysis</span>
-          <span class="tag">Event Study</span>
+          <span class="tag">DistilBERT</span>
+          <span class="tag">Stacked Event Study</span>
           <span class="tag">Welch's t-test</span>
           <span class="tag">Pandas</span>
         </div>
@@ -849,56 +849,32 @@
     });
   })();
 
-  /* ── Doncic Trade — Sentiment vs Volume Timeline ───────────────────────────
+  /* ── Stacked Trade Sentiment — Pooled Before/After (3 trades) ──────────────
   (function () {
-    var dates = ['Jan 2','Jan 3','Jan 4','Jan 5','Jan 6','Jan 7','Jan 8','Jan 9','Jan 10',
-                 'Jan 11','Jan 12','Jan 13','Jan 14','Jan 15','Jan 16','Jan 17','Jan 18','Jan 19','Jan 20',
-                 'Jan 21','Jan 22','Jan 23','Jan 24','Jan 25','Jan 26','Jan 27','Jan 28','Jan 29','Jan 30','Jan 31',
-                 'Feb 1','Feb 2','Feb 3','Feb 4','Feb 5','Feb 6','Feb 7','Feb 8',
-                 'Feb 9','Feb 10','Feb 11','Feb 12','Feb 13','Feb 14','Feb 15'];
-    var volume    = [10,6,3,4,6,9,5,3,6,9,7,7,10,8,8,4,3,3,3,3,8,10,8,7,4,6,6,7,10,26,
-                      100,100,100,100,70,89,68,61,100,23,100,71,38,32,28];
-    var vader     = [0.024,0.031,0.204,-0.121,-0.201,-0.028,0.048,0.134,0.080,0.107,0.072,-0.310,0.040,-0.051,-0.217,-0.023,-0.073,0.191,0.191,0.153,0.201,0.209,0.212,0.033,-0.288,-0.125,0.067,-0.140,-0.035,0.190,
-                      0.066,0.010,0.021,0.089,0.142,0.077,-0.082,-0.111,0.018,0.162,0.194,0.014,0.013,-0.007,-0.061];
-    var distilbert = [0.334,0.264,0.996,-0.886,-0.642,-0.555,-0.625,0.327,0.663,-0.066,-0.405,-0.439,-0.127,0.046,-0.231,-0.080,-0.322,0.360,0.360,-0.353,0.189,0.334,0.261,0.320,-0.140,-0.380,-0.004,-0.631,-0.320,-0.132,
-                       -0.047,-0.115,-0.079,0.035,0.057,-0.053,-0.337,-0.432,-0.011,0.299,0.304,-0.104,-0.235,0.159,0.181];
-    var tradeIdx = 30; // Feb 1
+    var labels = ['VADER', 'DistilBERT'];
+    var before = [0.037, -0.118];
+    var after  = [0.076, 0.050];
 
-    new Chart(document.getElementById('sentimentVolumeChart'), {
+    new Chart(document.getElementById('pooledSentimentChart'), {
+      type: 'bar',
       data: {
-        labels: dates,
+        labels: labels,
         datasets: [
           {
-            type: 'bar',
-            label: 'Headline Volume',
-            data: volume,
-            backgroundColor: dates.map(function(_, i){ return i >= tradeIdx ? 'rgba(155,61,54,0.55)' : 'rgba(76,114,176,0.55)'; }),
-            yAxisID: 'yVolume',
-            borderWidth: 0,
-            borderRadius: 2
+            label: 'Before (pooled, 3 trades)',
+            data: before,
+            backgroundColor: 'rgba(76,114,176,0.72)',
+            borderColor: '#4C72B0',
+            borderWidth: 1.5,
+            borderRadius: 4
           },
           {
-            type: 'line',
-            label: 'VADER (mean compound)',
-            data: vader,
-            borderColor: '#222',
-            backgroundColor: 'transparent',
-            borderWidth: 2,
-            pointRadius: 2,
-            yAxisID: 'ySentiment',
-            tension: 0.25
-          },
-          {
-            type: 'line',
-            label: 'DistilBERT (mean score)',
-            data: distilbert,
+            label: 'After (pooled, 3 trades)',
+            data: after,
+            backgroundColor: 'rgba(155,61,54,0.72)',
             borderColor: '#9B3D36',
-            backgroundColor: 'transparent',
-            borderWidth: 2,
-            borderDash: [4, 3],
-            pointRadius: 2,
-            yAxisID: 'ySentiment',
-            tension: 0.25
+            borderWidth: 1.5,
+            borderRadius: 4
           }
         ]
       },
@@ -910,25 +886,17 @@
           tooltip: Object.assign({}, chartDefaults.tip)
         },
         scales: {
-          x: { grid: { display: false }, border: { display: false }, ticks: Object.assign({}, chartDefaults.xTick, { maxRotation: 45, minRotation: 45 }) },
-          yVolume: {
-            position: 'left',
+          x: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: {
             grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
             ticks: chartDefaults.yTick,
-            title: { display: true, text: 'Headlines/day', font: { family: "'DM Sans', sans-serif", size: 9 } }
-          },
-          ySentiment: {
-            position: 'right',
-            min: -0.8, max: 0.8,
-            grid: { display: false }, border: { display: false },
-            ticks: chartDefaults.yTick,
-            title: { display: true, text: 'Mean sentiment', font: { family: "'DM Sans', sans-serif", size: 9 } }
+            title: { display: true, text: 'Mean sentiment score', font: { family: "'DM Sans', sans-serif", size: 9 } }
           }
         }
       }
     });
   })();
-  */ // end sentiment/volume chart comment
+  */ // end pooled sentiment chart comment
 
   /* ── NBA Career Survival — Cox Hazard Ratios ───────────────────────────────
   (function () {

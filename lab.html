@@ -52,7 +52,6 @@
 
     <div class="ai-projects">
 
-      <!--
       <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Sentiment Analysis · Stacked Event Study</div>
         <div class="ai-project-title">Sentiment Around Shocking NBA Trades — A Stacked Event Study</div>
@@ -60,7 +59,7 @@
           Does a major trade reliably shift media sentiment, or does it just look that way for any one event? Daily Google News headlines for 3 major in-season trades — Luka Doncic to the Lakers, Kevin Durant to the Suns, James Harden to the Nets — scored with VADER and DistilBERT, compared before vs. after each trade individually and pooled. 3,204 headlines total.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
-          Doncic alone: not significant. Durant alone: not significant. Harden alone: massive, p &lt; 0.0001 — DistilBERT swings from -0.23 (trade-demand drama) to +0.22 (superteam analysis) the moment the trade happened. Pooled across all 3, the effect is real for both methods (VADER p=0.0025, DistilBERT p&lt;0.0001). A single event didn't have the power to show what three, stacked, clearly do.
+          Doncic alone: not significant. Durant alone: not significant. Harden alone: massive, p &lt; 0.0001 — DistilBERT swings from -0.23 (trade-demand drama) to +0.22 (superteam analysis) the moment the trade happened. Pooled across all 3, the effect is real for both methods (VADER p=0.0025, DistilBERT p&lt;0.0001). A single event didn't have the power to show what three, stacked, clearly do. <a href="https://medium.com/p/40a7dcd0d5da" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
         </div>
 
         <div class="elo-chart-wrap" style="margin-top:1rem;">
@@ -80,7 +79,6 @@
           <span class="tag">Pandas</span>
         </div>
       </div>
-      -->
 
       <div class="ai-project-card">
         <div class="ai-project-label">Product DS · Recommender Systems · Similarity Search</div>
@@ -843,7 +841,7 @@
     });
   })();
 
-  /* ── Stacked Trade Sentiment — Pooled Before/After (3 trades) ──────────────
+  // ── Stacked Trade Sentiment — Pooled Before/After (3 trades) ──────────────
   (function () {
     var labels = ['VADER', 'DistilBERT'];
     var before = [0.037, -0.118];
@@ -890,7 +888,6 @@
       }
     });
   })();
-  */ // end pooled sentiment chart comment
 
   // ── NBA Career Survival — Cox Hazard Ratios ───────────────────────────────
   (function () {

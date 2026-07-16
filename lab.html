@@ -82,7 +82,6 @@
       </div>
       -->
 
-      <!--
       <div class="ai-project-card">
         <div class="ai-project-label">Product DS · Recommender Systems · Similarity Search</div>
         <div class="ai-project-title">Player Similarity Recommender — Premier League 2024-25</div>
@@ -90,7 +89,7 @@
           Can a "players like this" recommender find statistically similar players without ever being told what position they play? Cosine similarity on 23 per-90 stat features (incl. passing, creation, possession), indexed with FAISS, across 321 Premier League players (2024-25, 900+ minutes). Same architecture as "customers like this one" in marketing personalization.
         </div>
         <div class="ai-project-desc" style="margin-top:0.6rem;">
-          Quantitative validation: top-5 matches share position 72.1% of the time vs. 34.3% random chance — a 2.10x lift, with no position label ever fed to the model. The real test was Kevin De Bruyne — a first pass with no passing data matched him to plain wingers. Adding real FBref passing/creation/possession stats (fetched past the library's public API limits) fixed it: Bukayo Saka, a genuine elite creator, now shows up at #2.
+          Quantitative validation: top-5 matches share position 72.1% of the time vs. 34.3% random chance — a 2.10x lift, with no position label ever fed to the model. The real test was Kevin De Bruyne — a first pass with no passing data matched him to plain wingers. Adding real FBref passing/creation/possession stats (fetched past the library's public API limits) fixed it: Bukayo Saka, a genuine elite creator, now shows up at #2. <a href="https://medium.com/p/89ec14a206ae" target="_blank" rel="noopener" class="inline-link">Read the full write-up →</a>
         </div>
 
         <div class="elo-chart-wrap" style="margin-top:1rem;">
@@ -110,7 +109,6 @@
           <span class="tag">Scikit-learn</span>
         </div>
       </div>
-      -->
 
       <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Forecasting · Time Series</div>
@@ -936,13 +934,12 @@
     });
   })();
 
-  /* ── Player Similarity Recommender — De Bruyne top 5 ───────────────────────
+  // ── Player Similarity Recommender — De Bruyne top 5 ───────────────────────
   (function () {
     var labels = ['Pedro Neto', 'Bukayo Saka', 'Dwight McNeil', 'Sávio', 'Marcus Tavernier'];
     var values = [0.949, 0.909, 0.908, 0.878, 0.874];
     hbar('similarityChart', labels, values, null, 0.85);
   })();
-  */ // end similarity chart comment
 
   // ── World Cup Propensity Model — 2026 Rankings ────────────────────────────
   (function () {

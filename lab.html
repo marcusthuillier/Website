@@ -52,6 +52,175 @@
 
     <div class="ai-projects">
 
+      <!-- MODEL 15: Causal Inference — uncomment + add Medium link when published
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Causal Inference · Interrupted Time Series</div>
+        <div class="ai-project-title">Do Manager Changes Work? Causal Evaluation of 7 La Liga Sackings</div>
+        <div class="ai-project-desc">
+          When a manager is fired and results improve, is it causation or regression to the mean? Seven mid-season La Liga manager changes tested three ways: naive before/after, Interrupted Time Series, and Google CausalImpact — the same toolkit used to evaluate whether a marketing campaign actually lifted sales or just coincided with a seasonal uptick.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Naive comparison: 3 of 7 improved. ITS and CausalImpact: 0 of 7 statistically significant. Every apparent success was flagged as regression-to-the-mean risk — sackings happen when performance is abnormally bad, so results improve regardless of who replaces. The naive method and the causal method disagreed 100% of the time on the cases where it mattered.
+        </div>
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Causal Impact Estimates — 7 Manager Changes (0 of 7 significant)</span>
+            <span class="elo-chart-source">La Liga 2015-16 &amp; 2019-20 · Google CausalImpact · xG/match · all p &gt; 0.05</span>
+          </div>
+          <canvas id="causalManagerChart" height="220"></canvas>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">CausalImpact</span>
+          <span class="tag">Interrupted Time Series</span>
+          <span class="tag">statsmodels</span>
+          <span class="tag">Regression to Mean</span>
+          <span class="tag">La Liga</span>
+        </div>
+      </div>
+      -->
+
+      <!-- MODEL 14: MMM — uncomment + add Medium link when published
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Media Mix Modelling · Ridge Regression</div>
+        <div class="ai-project-title">Match Outcome MMM — Decomposing Goals in the Premier League (2,660 Matches)</div>
+        <div class="ai-project-desc">
+          Media Mix Modelling decomposes an outcome into contributions by driver — usually sales by marketing channel. Here the outcome is goals per match across 2,660 Premier League matches. Drivers: home advantage, recent form, rest days, and travel distance. Ridge regression with cross-validation across 7 seasons (2015–16 to 2021–22).
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Form is the top driver. Home advantage adds 0.17 goals per match on average. Rest follows a saturation curve — marginal benefit rises steeply through 4 days then flattens, peaking around 6. Travel adds a small penalty for away sides. R² of 0.07: most variance in football is irreducible noise. The honest finding is that you can model what you can, but luck is real.
+        </div>
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Rest-Day Saturation Curve — Performance Contribution (normalized)</span>
+            <span class="elo-chart-source">Premier League 2015–22 · Ridge regression outputs · diminishing returns after day 4</span>
+          </div>
+          <canvas id="restSaturationChart" height="200"></canvas>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Ridge Regression</span>
+          <span class="tag">Media Mix Model</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Premier League</span>
+          <span class="tag">FBref</span>
+        </div>
+      </div>
+      -->
+
+      <!-- MODEL 13: Attribution — uncomment + add Medium link when published
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Attribution Modelling · Shapley Values</div>
+        <div class="ai-project-title">Goal Attribution — Last-Touch vs Shapley in La Liga (304 Goals)</div>
+        <div class="ai-project-desc">
+          How much credit does the scorer deserve? 304 La Liga goals reconstructed into passing chains and attributed three ways: last-touch (100% to scorer), equal linear split, and Shapley value — the cooperative game-theory method that assigns credit by marginal contribution. The same math allocates digital conversions across marketing channels.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Last-touch gives the scorer 100% on every goal. Shapley gives them 49.6%. The most undervalued player: Jordi Alba — ranked 145th by last-touch, 41st by Shapley. His involvement earlier in chains was invisible to the default method. Most overvalued: John Guidetti — 21st by last-touch, 73rd by Shapley.
+        </div>
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Scorer's Share of Goal Credit — by Attribution Method</span>
+            <span class="elo-chart-source">La Liga · StatsBomb open data · 304 goals · 100 matches</span>
+          </div>
+          <canvas id="attributionMethodChart" height="200"></canvas>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Shapley Values</span>
+          <span class="tag">Attribution Modelling</span>
+          <span class="tag">Game Theory</span>
+          <span class="tag">pandas</span>
+          <span class="tag">La Liga</span>
+        </div>
+      </div>
+      -->
+
+      <!-- MODEL 12: Pricing Science — uncomment + add Medium link when published
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Pricing Science · OLS · Panel Data</div>
+        <div class="ai-project-title">MLB Ticket Price Elasticity — Why Observational Data Can't Measure It (90 Team-Seasons)</div>
+        <div class="ai-project-desc">
+          Can you estimate price elasticity of demand from observational ticket data? Team Marketing Report prices for 30 MLB teams across 2011, 2013, and 2015 — a real $15–$53 spread — matched to official home attendance. Two specifications: cross-sectional log-log OLS with year effects, then team fixed effects to absorb brand and market confounders.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Cross-section: elasticity +0.34, p&lt;0.001 — positive. Teams with higher prices draw more fans because of brand equity, not despite the price. Add team fixed effects: +0.25, p=0.136 — not significant. The bias disappears but so does the signal. Three time points per team is not enough variation to identify direction. The one clean result: a 10pp win-rate improvement drives 8% more attendance.
+        </div>
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Price Elasticity Estimates — Cross-Section vs Within-Team (both positive, neither correct)</span>
+            <span class="elo-chart-source">30 MLB teams · 2011, 2013, 2015 · Team Marketing Report · true elasticity should be negative</span>
+          </div>
+          <canvas id="pricingElasticityChart" height="180"></canvas>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">OLS Regression</span>
+          <span class="tag">Panel Data</span>
+          <span class="tag">Econometrics</span>
+          <span class="tag">statsmodels</span>
+          <span class="tag">Team Marketing Report</span>
+        </div>
+      </div>
+      -->
+
+      <!-- MODEL 11: Lead Scoring — uncomment + add Medium link when published
+      <div class="ai-project-card">
+        <div class="ai-project-label">Marketing Science · Lead Scoring · Logistic Regression · XGBoost · SHAP</div>
+        <div class="ai-project-title">NBA Rookie Lead Scoring — Who Will Break Through? (1,599 Rookies, 1997–2023)</div>
+        <div class="ai-project-desc">
+          Which NBA rookies will establish sustained careers — and which will wash out? Logistic regression and XGBoost trained on 1,599 rookie seasons, predicting sustained league presence. The marketing parallel: scoring inbound leads at the moment of acquisition, before any behavioral signals exist, to decide who is worth the development investment.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          AUC 0.85. The top SHAP feature by a large margin was entry age — not rookie stats. Players who entered under 23 activated at 57.4% vs 24.8% for those 23 and older: a 2.3x lift. A static characteristic present before a meaningful minute was played was the strongest predictor of long-term success.
+        </div>
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">SHAP Feature Importance — Top 5 Predictors of Rookie Activation</span>
+            <span class="elo-chart-source">XGBoost · 1,599 rookies · 1997–2023 · nba_api · mean |SHAP| value</span>
+          </div>
+          <canvas id="shapImpChart" height="200"></canvas>
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">SHAP</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">nba_api</span>
+        </div>
+      </div>
+      -->
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">Sports Analytics · Causal Inference · Difference-in-Differences</div>
+        <div class="ai-project-title">Do Defensive Substitutions Actually Work? A Test on 18,161 Substitutions</div>
+        <div class="ai-project-desc">
+          Prompted by Thomas Tuchel's back-five switch in the England-Argentina 2026 World Cup semifinal: does bringing on a defender for an attacker or midfielder actually protect a lead, or does it just look that way in hindsight? 2,860 matches and 18,161 substitutions from StatsBomb's open data — top domestic leagues, both World Cups, both Euros, both Women's World Cups, Copa America 2024, AFCON 2023, two full FA Women's Super League seasons — matched against tens of thousands of "no substitution" control moments in the identical scoreline, time, and pressure situation.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Defender on for a midfielder or forward: goal difference -0.68 per 90, p=0.033 — a proven net cost, not just an absent benefit. The mirror image, attacker on for a defender or midfielder, is a proven net gain: +0.53, p=0.0066. The version that actually holds up as a defensive fix — forward off, midfielder on, back line untouched — shows a real drop in shots and goals conceded with no proven cost to attack.
+          <!-- TODO: add 'Read the full write-up →' link once the Medium article is published -->
+        </div>
+
+        <div class="elo-chart-wrap" style="margin-top:1rem;">
+          <div class="elo-chart-header">
+            <span class="elo-chart-title">Goal Difference Impact by Substitution Type (per 90 min)</span>
+            <span class="elo-chart-source">StatsBomb open data · 2,860 matches · DiD vs matched no-substitution controls</span>
+          </div>
+          <canvas id="subGoalDiffChart" height="220"></canvas>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Difference-in-Differences</span>
+          <span class="tag">Causal Inference</span>
+          <span class="tag">StatsBomb</span>
+          <span class="tag">Matched Controls</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+
       <div class="ai-project-card">
         <div class="ai-project-label">Marketing Science · Sentiment Analysis · Stacked Event Study</div>
         <div class="ai-project-title">Sentiment Around Shocking NBA Trades — A Stacked Event Study</div>
@@ -532,6 +701,53 @@
     if (cv) cv.style.display = 'none';
   }
 
+  // ── Substitution Analysis — Goal Diff DiD by Category ────────────────────
+  (function () {
+    var labels = ['Defender on (for MID/FWD)', 'Like-for-like sub', 'Forward off, MID on (n.s.)', 'Attacker on (for DEF/MID)'];
+    var values = [-0.68, 0.29, 0.34, 0.53];
+    var pvals  = [0.033, 0.0001, 0.181, 0.0066];
+    var colors  = ['rgba(155,61,54,0.72)', 'rgba(90,150,90,0.68)', 'rgba(120,130,140,0.45)', 'rgba(90,150,90,0.68)'];
+    var borders = ['#9B3D36', '#5A965A', 'rgba(120,130,140,0.85)', '#5A965A'];
+
+    new Chart(document.getElementById('subGoalDiffChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: colors,
+          borderColor: borders,
+          borderWidth: 1.5,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: {
+              label: function(c){ return '  ' + (c.raw > 0 ? '+' : '') + c.formattedValue + ' goal diff / 90'; },
+              afterLabel: function(c){
+                var p = pvals[c.dataIndex];
+                return p < 0.05 ? '  p=' + p + ' (significant)' : '  p=' + p + ' (not significant)';
+              }
+            }
+          })
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+            ticks: chartDefaults.xTick
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  })();
+
   // ── ELO Rankings + World Rugby comparison ──────────────────────────────
   (function () {
     var CSV_URL  = REPO + 'ELOR/Datasets/get_rank.csv';
@@ -1009,6 +1225,140 @@
       }
     });
   })();
+
+  /* ── MODELS 11–15 CHARTS — uncomment each block when its card is published ──
+
+  // ── Model 11: Lead Scoring — SHAP Feature Importance ─────────────────────
+  (function () {
+    hbar(
+      'shapImpChart',
+      ['Age at entry', 'Points per game', 'Steals per game', 'True shooting %', 'Assists per game'],
+      [0.869, 0.544, 0.325, 0.303, 0.266],
+      ' mean |SHAP|'
+    );
+  })();
+
+  // ── Model 12: Pricing Elasticity — Cross-section vs Within-team ──────────
+  (function () {
+    var colors  = ['rgba(155,61,54,0.70)', 'rgba(100,100,110,0.55)'];
+    var borders = ['#9B3D36', '#888'];
+    new Chart(document.getElementById('pricingElasticityChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Cross-section (year FE only)', 'Within-team (team + year FE, p=0.14)'],
+        datasets: [{ data: [0.34, 0.25], backgroundColor: colors, borderColor: borders, borderWidth: 1.5, borderRadius: 4 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  elasticity: +' + c.formattedValue + '  (should be < 0)'; } }
+          })
+        },
+        scales: {
+          x: { min: 0, grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  })();
+
+  // ── Model 13: Attribution — Scorer % by Method ───────────────────────────
+  (function () {
+    new Chart(document.getElementById('attributionMethodChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Last-touch', 'Shapley', 'Linear'],
+        datasets: [{
+          data: [100, 49.6, 40.3],
+          backgroundColor: ['rgba(155,61,54,0.70)', 'rgba(76,114,176,0.70)', 'rgba(90,150,90,0.65)'],
+          borderColor: ['#9B3D36', '#4C72B0', '#5A965A'],
+          borderWidth: 1.5, borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  scorer gets ' + c.formattedValue + '% of credit'; } }
+          })
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: { min: 0, max: 115, grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false },
+               ticks: Object.assign({}, chartDefaults.yTick, { callback: function(v){ return v + '%'; } }) }
+        }
+      }
+    });
+  })();
+
+  // ── Model 14: MMM — Rest-Day Saturation Curve ────────────────────────────
+  (function () {
+    var days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var vals = [0.20, 0.33, 0.43, 0.50, 0.56, 0.60, 0.64, 0.67, 0.69, 0.71];
+    new Chart(document.getElementById('restSaturationChart'), {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          data: vals,
+          borderColor: '#4C72B0', backgroundColor: 'rgba(76,114,176,0.12)',
+          borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#4C72B0', fill: true, tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  ' + c.formattedValue + ' performance contribution'; } }
+          })
+        },
+        scales: {
+          x: { title: { display: true, text: 'Rest days before match', color: '#6b7a8d', font: { family: "'DM Sans', sans-serif", size: 9 } },
+               grid: { color: 'rgba(213,208,200,0.3)' }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: { min: 0, max: 0.85, grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false }, ticks: chartDefaults.yTick }
+        }
+      }
+    });
+  })();
+
+  // ── Model 15: Causal Inference — Manager Impact Estimates ────────────────
+  (function () {
+    var labels = ['Gâlcă · Espanyol', 'Solar · Barcelona', 'Zidane · Madrid', 'Neville · Valencia', 'Ruíz · Betis', 'Marco · Valencia', 'Mena · Sociedad'];
+    var values = [0.33, 0.26, 0.08, -0.05, -0.21, -0.30, -0.56];
+    var colors  = values.map(function(v){ return v >= 0 ? 'rgba(76,114,176,0.68)' : 'rgba(155,61,54,0.68)'; });
+    var borders = values.map(function(v){ return v >= 0 ? '#4C72B0' : '#9B3D36'; });
+    new Chart(document.getElementById('causalManagerChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{ data: values, backgroundColor: colors, borderColor: borders, borderWidth: 1.5, borderRadius: 3 }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true,
+        animation: { duration: 900, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, chartDefaults.tip, {
+            callbacks: { label: function(c){ return '  ' + (c.raw > 0 ? '+' : '') + c.formattedValue + ' xG/match (not significant)'; } }
+          })
+        },
+        scales: {
+          x: { grid: { color: 'rgba(213,208,200,0.5)' }, border: { display: false }, ticks: chartDefaults.xTick },
+          y: { grid: { display: false }, border: { display: false },
+               ticks: Object.assign({}, chartDefaults.yTick, { font: { family: "'DM Sans', sans-serif", size: 9 } }) }
+        }
+      }
+    });
+  })();
+
+  end models 11-15 */
 
   </script>
 </body>

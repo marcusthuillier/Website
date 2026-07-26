@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Undefeated XV</title>
+<link rel="stylesheet" href="style.css?v=1785041915">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ROTATE WARNING -->
+  <div id="rotate-warning" class="screen hidden">
+    <p>Undefeated XV is best played in portrait mode.</p>
+  </div>
+
+  <!-- HOME -->
+  <section id="screen-home" class="screen">
+    <div class="home-inner">
+      <h1 class="logo">UNDEFEATED<span>XV</span></h1>
+      <p class="tagline">Spin for a random nation and World Cup, pick a player from that real squad. Repeat until your XV is full.<br>Can they survive a full test season unbeaten?</p>
+      <button id="btn-start" class="btn btn-primary">Start the draft</button>
+      <button id="btn-history" class="btn btn-gold">📜 History Mode</button>
+      <button id="btn-ratings" class="btn btn-ghost">Browse player ratings</button>
+      <button id="btn-how" class="btn btn-ghost">How it works</button>
+    </div>
+  </section>
+
+  <!-- HISTORY MODE: YEAR PICKER -->
+  <section id="screen-history-year" class="screen hidden">
+    <header class="draft-header">
+      <h2>Pick a World Cup</h2>
+      <button id="btn-history-back" class="btn-ghost-small">Back</button>
+    </header>
+    <p class="pick-empty" style="padding:0 0 16px;text-align:left;">
+      Your XV drops into a real pool from that tournament, replacing one of its
+      real teams — then plays a real run through the actual bracket that
+      unfolds from there, real opponents and all.
+    </p>
+    <div id="history-year-list" class="picker-list"></div>
+  </section>
+
+  <!-- RATINGS BROWSER -->
+  <section id="screen-ratings" class="screen hidden">
+    <header class="draft-header">
+      <h2>Player ratings</h2>
+      <button id="btn-ratings-back" class="btn-ghost-small">Back</button>
+    </header>
+    <input id="ratings-search" class="picker-search" type="text" placeholder="Search players, nations, positions...">
+    <div id="ratings-list" class="picker-list ratings-list"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="screen-how" class="screen hidden">
+    <div class="panel">
+      <h2>How it works</h2>
+      <ol class="how-list">
+        <li><strong>Fill 10 positions.</strong> Prop, Hooker, Lock, Flanker, Number 8, Scrum-half, Fly-half, Centre, Wing, Fullback.</li>
+        <li><strong>Spin.</strong> Hit the spin button and the game randomly lands on a real nation's squad from a real World Cup (New Zealand 1987, South Africa 1995, England 2003...). Not happy with it? Spin again, no limit.</li>
+        <li><strong>Pick a player.</strong> Choose anyone from that squad who still has an open slot in your XV. Spin again for the next one. Repeat until all 10 are filled, mixing nations and decades however it lands.</li>
+        <li><strong>Build chemistry.</strong> Players from the same nation link up, and players who were literally on the same World Cup squad link up even harder.</li>
+        <li><strong>Pick a mode:</strong> a 14-match Test Campaign (plays out in full — final record is what matters, one loss doesn't end it); Rugby World Cup 2027 (drops your XV into a real pool from the actual next tournament's draw, then a real simulated run through the real bracket structure — one loss ends it); or History Mode (pick a real past World Cup, drop into a real pool from it, and play a real run through that year's actual bracket, real opponents at every stage — one loss ends it).</li>
+      </ol>
+      <button class="btn btn-primary" id="btn-how-back">Back</button>
+    </div>
+  </section>
+
+  <!-- DRAFT -->
+  <section id="screen-draft" class="screen wide-screen hidden">
+    <header class="draft-header">
+      <h2>Build your XV</h2>
+      <div id="draft-progress" class="draft-progress">0 / 10</div>
+    </header>
+
+    <div class="draft-columns">
+      <!-- PICK PANE (left) -->
+      <div class="pick-pane">
+        <div class="spin-controls">
+          <button id="btn-spin-all" class="btn btn-primary btn-spin">🎲 Respin all</button>
+          <button id="btn-spin-date" class="btn btn-ghost" disabled>📅 Change date</button>
+          <button id="btn-spin-team" class="btn btn-ghost" disabled>🌍 Change team</button>
+        </div>
+        <div id="pick-content" class="pick-content">
+          <p class="pick-empty">Hit "Respin all" to land on a random nation and World Cup.</p>
+        </div>
+      </div>
+
+      <!-- SQUAD PANE (right) -->
+      <div class="squad-pane">
+        <div id="slots" class="slots-list"></div>
+        <div class="squad-footer">
+          <div id="team-preview" class="team-preview"></div>
+          <button id="btn-start-test" class="btn btn-primary hidden">Enter Test Campaign</button>
+          <button id="btn-start-worldcup" class="btn btn-primary btn-gold hidden">Enter Rugby World Cup 2027</button>
+          <button id="btn-start-history" class="btn btn-primary btn-gold hidden">Enter Campaign</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section id="screen-end" class="screen hidden">
+    <div class="panel end-panel">
+      <h2 id="end-title"></h2>
+      <p id="end-subtitle"></p>
+      <div id="end-log" class="result-log"></div>
+      <div class="end-actions">
+        <button id="btn-copy" class="btn btn-ghost">Copy result</button>
+        <button id="btn-restart" class="btn btn-primary">Draft a new XV</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="main.js?v=1785041915"></script>
+</body>
+</html>

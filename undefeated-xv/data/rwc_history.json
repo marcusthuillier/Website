@@ -1,0 +1,765 @@
+{
+  "1987": {
+    "pools": [
+      {
+        "pool": "1",
+        "teams": [
+          "Australia",
+          "England",
+          "USA",
+          "Japan"
+        ]
+      },
+      {
+        "pool": "2",
+        "teams": [
+          "Wales",
+          "Ireland",
+          "Canada",
+          "Tonga"
+        ]
+      },
+      {
+        "pool": "3",
+        "teams": [
+          "New Zealand",
+          "Fiji",
+          "Italy",
+          "Argentina"
+        ]
+      },
+      {
+        "pool": "4",
+        "teams": [
+          "France",
+          "Scotland",
+          "Romania",
+          "Zimbabwe"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "New Zealand",
+        "loser": "Scotland"
+      },
+      {
+        "winner": "Australia",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "France",
+        "loser": "Fiji"
+      },
+      {
+        "winner": "Wales",
+        "loser": "England"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "New Zealand",
+        "loser": "Wales"
+      },
+      {
+        "winner": "France",
+        "loser": "Australia"
+      }
+    ],
+    "final": {
+      "winner": "New Zealand",
+      "loser": "France"
+    },
+    "champion": "New Zealand"
+  },
+  "1991": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "New Zealand",
+          "England",
+          "Italy",
+          "USA"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "Scotland",
+          "Ireland",
+          "Japan",
+          "Zimbabwe"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "Australia",
+          "Samoa",
+          "Wales",
+          "Argentina"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "France",
+          "Canada",
+          "Romania",
+          "Fiji"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "England",
+        "loser": "France"
+      },
+      {
+        "winner": "Scotland",
+        "loser": "Samoa"
+      },
+      {
+        "winner": "Australia",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Canada"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "England",
+        "loser": "Scotland"
+      },
+      {
+        "winner": "Australia",
+        "loser": "New Zealand"
+      }
+    ],
+    "final": {
+      "winner": "Australia",
+      "loser": "England"
+    },
+    "champion": "Australia"
+  },
+  "1995": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "South Africa",
+          "Australia",
+          "Canada",
+          "Romania"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "England",
+          "Samoa",
+          "Italy",
+          "Argentina"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "New Zealand",
+          "Ireland",
+          "Wales",
+          "Japan"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "France",
+          "Scotland",
+          "Tonga",
+          "Ivory Coast"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "France",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Samoa"
+      },
+      {
+        "winner": "England",
+        "loser": "Australia"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Scotland"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "South Africa",
+        "loser": "France"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "England"
+      }
+    ],
+    "final": {
+      "winner": "South Africa",
+      "loser": "New Zealand"
+    },
+    "champion": "South Africa"
+  },
+  "1999": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "South Africa",
+          "Scotland",
+          "Uruguay",
+          "Spain"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "New Zealand",
+          "England",
+          "Tonga",
+          "Italy"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "France",
+          "Fiji",
+          "Canada",
+          "Namibia"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "Wales",
+          "Samoa",
+          "Argentina",
+          "Japan"
+        ]
+      },
+      {
+        "pool": "E",
+        "teams": [
+          "Australia",
+          "Ireland",
+          "Romania",
+          "USA"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "Australia",
+        "loser": "Wales"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "England"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Scotland"
+      },
+      {
+        "winner": "France",
+        "loser": "Argentina"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "France",
+        "loser": "New Zealand"
+      },
+      {
+        "winner": "Australia",
+        "loser": "South Africa"
+      }
+    ],
+    "final": {
+      "winner": "Australia",
+      "loser": "France"
+    },
+    "champion": "Australia"
+  },
+  "2003": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "Australia",
+          "Ireland",
+          "Argentina",
+          "Romania",
+          "Namibia"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "France",
+          "Scotland",
+          "Fiji",
+          "USA",
+          "Japan"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "England",
+          "South Africa",
+          "Samoa",
+          "Uruguay",
+          "Georgia"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "New Zealand",
+          "Wales",
+          "Italy",
+          "Canada",
+          "Tonga"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "England",
+        "loser": "Wales"
+      },
+      {
+        "winner": "France",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "South Africa"
+      },
+      {
+        "winner": "Australia",
+        "loser": "Scotland"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "Australia",
+        "loser": "New Zealand"
+      },
+      {
+        "winner": "England",
+        "loser": "France"
+      }
+    ],
+    "final": {
+      "winner": "England",
+      "loser": "Australia"
+    },
+    "champion": "England"
+  },
+  "2007": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "South Africa",
+          "England",
+          "Tonga",
+          "Samoa",
+          "USA"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "Australia",
+          "Fiji",
+          "Wales",
+          "Japan",
+          "Canada"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "New Zealand",
+          "Scotland",
+          "Italy",
+          "Romania",
+          "Portugal"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "Argentina",
+          "France",
+          "Ireland",
+          "Georgia",
+          "Namibia"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "England",
+        "loser": "Australia"
+      },
+      {
+        "winner": "France",
+        "loser": "New Zealand"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Fiji"
+      },
+      {
+        "winner": "Argentina",
+        "loser": "Scotland"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "England",
+        "loser": "France"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Argentina"
+      }
+    ],
+    "final": {
+      "winner": "South Africa",
+      "loser": "England"
+    },
+    "champion": "South Africa"
+  },
+  "2011": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "New Zealand",
+          "France",
+          "Tonga",
+          "Canada",
+          "Japan"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "England",
+          "Argentina",
+          "Scotland",
+          "Georgia",
+          "Romania"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "Ireland",
+          "Australia",
+          "Italy",
+          "USA",
+          "Russia"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "South Africa",
+          "Wales",
+          "Samoa",
+          "Fiji",
+          "Namibia"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "Wales",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "France",
+        "loser": "England"
+      },
+      {
+        "winner": "Australia",
+        "loser": "South Africa"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Argentina"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "France",
+        "loser": "Wales"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Australia"
+      }
+    ],
+    "final": {
+      "winner": "New Zealand",
+      "loser": "France"
+    },
+    "champion": "New Zealand"
+  },
+  "2015": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "Australia",
+          "Wales",
+          "England",
+          "Fiji",
+          "Uruguay"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "South Africa",
+          "Scotland",
+          "Japan",
+          "Samoa",
+          "USA"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "New Zealand",
+          "Argentina",
+          "Tonga",
+          "Georgia",
+          "Namibia"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "France",
+          "Ireland",
+          "Italy",
+          "Canada",
+          "Romania"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "New Zealand",
+        "loser": "France"
+      },
+      {
+        "winner": "Australia",
+        "loser": "Scotland"
+      },
+      {
+        "winner": "Argentina",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Wales"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "New Zealand",
+        "loser": "Argentina"
+      },
+      {
+        "winner": "Australia",
+        "loser": "South Africa"
+      }
+    ],
+    "final": {
+      "winner": "New Zealand",
+      "loser": "Australia"
+    },
+    "champion": "New Zealand"
+  },
+  "2019": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "Japan",
+          "Ireland",
+          "Scotland",
+          "Samoa",
+          "Russia"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "New Zealand",
+          "South Africa",
+          "Italy",
+          "Namibia",
+          "Canada"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "England",
+          "France",
+          "Argentina",
+          "Tonga",
+          "USA"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "Wales",
+          "Australia",
+          "Fiji",
+          "Georgia",
+          "Uruguay"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "England",
+        "loser": "Australia"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "Wales",
+        "loser": "France"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Japan"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "England",
+        "loser": "New Zealand"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "Wales"
+      }
+    ],
+    "final": {
+      "winner": "South Africa",
+      "loser": "England"
+    },
+    "champion": "South Africa"
+  },
+  "2023": {
+    "pools": [
+      {
+        "pool": "A",
+        "teams": [
+          "France",
+          "New Zealand",
+          "Italy",
+          "Uruguay",
+          "Namibia"
+        ]
+      },
+      {
+        "pool": "B",
+        "teams": [
+          "Ireland",
+          "South Africa",
+          "Scotland",
+          "Tonga",
+          "Romania"
+        ]
+      },
+      {
+        "pool": "C",
+        "teams": [
+          "Wales",
+          "Fiji",
+          "Australia",
+          "Portugal",
+          "Georgia"
+        ]
+      },
+      {
+        "pool": "D",
+        "teams": [
+          "England",
+          "Argentina",
+          "Japan",
+          "Samoa",
+          "Chile"
+        ]
+      }
+    ],
+    "quarterfinals": [
+      {
+        "winner": "Argentina",
+        "loser": "Wales"
+      },
+      {
+        "winner": "New Zealand",
+        "loser": "Ireland"
+      },
+      {
+        "winner": "England",
+        "loser": "Fiji"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "France"
+      }
+    ],
+    "semifinals": [
+      {
+        "winner": "New Zealand",
+        "loser": "Argentina"
+      },
+      {
+        "winner": "South Africa",
+        "loser": "England"
+      }
+    ],
+    "final": {
+      "winner": "South Africa",
+      "loser": "New Zealand"
+    },
+    "champion": "South Africa"
+  }
+}

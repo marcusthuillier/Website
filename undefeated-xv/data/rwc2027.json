@@ -1,0 +1,113 @@
+{
+  "drawDate": "2025-12-03",
+  "pools": {
+    "A": [
+      {
+        "nation": "New Zealand",
+        "elo": 2432
+      },
+      {
+        "nation": "Australia",
+        "elo": 2048
+      },
+      {
+        "nation": "Chile",
+        "elo": 1606
+      },
+      {
+        "nation": "Hong Kong China",
+        "elo": 1583
+      }
+    ],
+    "B": [
+      {
+        "nation": "South Africa",
+        "elo": 2543
+      },
+      {
+        "nation": "Italy",
+        "elo": 1891
+      },
+      {
+        "nation": "Georgia",
+        "elo": 1939
+      },
+      {
+        "nation": "Romania",
+        "elo": 1482
+      }
+    ],
+    "C": [
+      {
+        "nation": "Argentina",
+        "elo": 2116
+      },
+      {
+        "nation": "Fiji",
+        "elo": 2046
+      },
+      {
+        "nation": "Spain",
+        "elo": 1700
+      },
+      {
+        "nation": "Canada",
+        "elo": 1428
+      }
+    ],
+    "D": [
+      {
+        "nation": "Ireland",
+        "elo": 2384
+      },
+      {
+        "nation": "Scotland",
+        "elo": 2175
+      },
+      {
+        "nation": "Uruguay",
+        "elo": 1698
+      },
+      {
+        "nation": "Portugal",
+        "elo": 1764
+      }
+    ],
+    "E": [
+      {
+        "nation": "France",
+        "elo": 2332
+      },
+      {
+        "nation": "Japan",
+        "elo": 1864
+      },
+      {
+        "nation": "USA",
+        "elo": 1707
+      },
+      {
+        "nation": "Samoa",
+        "elo": 1720
+      }
+    ],
+    "F": [
+      {
+        "nation": "England",
+        "elo": 2182
+      },
+      {
+        "nation": "Wales",
+        "elo": 1899
+      },
+      {
+        "nation": "Tonga",
+        "elo": 1638
+      },
+      {
+        "nation": "Zimbabwe",
+        "elo": 1691
+      }
+    ]
+  }
+}

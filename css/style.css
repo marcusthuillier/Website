@@ -161,6 +161,7 @@ body {
 .banner--nyu          { background: linear-gradient(135deg, #57068c 0%, #8900e1 100%); }
 .banner--northwestern { background: linear-gradient(135deg, #4e2a84 0%, #7b68ee 100%); }
 .banner--career       { background: linear-gradient(135deg, #1c2a3a 0%, #3d5068 100%); }
+.banner--undefeated   { background: linear-gradient(135deg, #0b1710 0%, #1f3d28 100%); }
 @media (max-width: 768px) { .banner--inner { height: 120px; } }
 
 /* ── PAGE HEADER (inner pages) ── */
@@ -1018,6 +1019,50 @@ body {
 }
 
 .tag:hover { background: var(--accent-glow); }
+
+/* ── EMBEDDED PLAY FRAME (Undefeated XV) ── */
+.play-frame-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 0.9rem;
+  box-shadow: var(--shadow-sm);
+  margin: 1.5rem 0;
+}
+.play-frame-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.5rem 0.8rem;
+}
+.play-frame-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.play-frame-open {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.play-frame-open:hover { color: var(--accent-light); }
+.play-frame {
+  width: 100%;
+  height: 900px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #0b1710;
+  display: block;
+}
+@media (max-width: 640px) {
+  .play-frame { height: 760px; }
+}
 
 /* ── AI / WORKS PROJECT CARDS ── */
 .ai-projects {

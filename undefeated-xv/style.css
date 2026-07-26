@@ -1,0 +1,367 @@
+:root {
+  --bg: #0b1710;
+  --bg-panel: #12241a;
+  --bg-card: #17301f;
+  --bg-card-hover: #1f3d28;
+  --line: #2a4a34;
+  --text: #f2f5f0;
+  --text-dim: #9fb3a5;
+  --accent: #d9a441;
+  --accent-dim: #8a6a2a;
+  --win: #3fa85c;
+  --loss: #c74b3f;
+  --legend: #b98bd6;
+  --radius: 14px;
+  --max-w: 480px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.hidden { display: none !important; }
+
+.screen { padding: 20px 16px 12px; }
+
+/* The draft screen breaks out of the phone-width frame on wider viewports
+   so the pick pane (left) and squad pane (right) can sit side by side, like
+   the reference games. Falls back to a stacked single column on phones. */
+.wide-screen {
+  width: 100vw;
+  max-width: 980px;
+  margin-left: calc(-50vw + 50%);
+  box-sizing: border-box;
+}
+
+.draft-columns {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+.pick-pane {
+  flex: 1 1 58%;
+  min-width: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.squad-pane {
+  flex: 1 1 42%;
+  min-width: 0;
+  position: sticky;
+  top: 16px;
+}
+@media (max-width: 760px) {
+  .draft-columns { flex-direction: column; }
+  .squad-pane { position: static; width: 100%; }
+  .pick-pane { width: 100%; }
+}
+
+/* HOME */
+.home-inner {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+}
+.logo {
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  margin: 0;
+  font-weight: 800;
+}
+.logo span { color: var(--accent); }
+.tagline {
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #1a1206;
+}
+.btn-primary:disabled {
+  background: var(--accent-dim);
+  color: #6b5c3f;
+  cursor: not-allowed;
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+}
+.btn-gold {
+  background: linear-gradient(135deg, #f0c869, var(--accent));
+}
+.btn-spin {
+  font-size: 1.05rem;
+  box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.18);
+}
+.spin-era-heading {
+  text-align: center;
+  padding: 4px 2px 14px;
+}
+.spin-era-heading .se-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.spin-era-heading .se-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.btn-ghost-small {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.ratings-list {
+  max-height: 80vh;
+  margin-top: 12px;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.how-list {
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding-left: 20px;
+}
+.how-list strong { color: var(--text); }
+#screen-how .btn { margin-top: 14px; }
+
+/* DRAFT */
+.draft-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.draft-header h2 { margin: 0; }
+.draft-progress {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* Squad pane: a real team-sheet layout — front row, second row, back row,
+   half-backs, centre/wing, fullback — not a flat list. Each .squad-row is
+   one "line" of the sheet, holding 1 or 2 slot cards side by side. */
+.slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.squad-row {
+  display: flex;
+  gap: 6px;
+}
+.squad-row .slot-row {
+  flex: 1;
+  min-width: 0;
+}
+.slot-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  min-height: 30px;
+}
+.slot-row:active { background: var(--bg-card-hover); }
+.slot-row.filled { border-color: var(--accent-dim); }
+.slot-row .sr-pos {
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.slot-row .sr-body { max-width: 100%; }
+.slot-row .sr-name {
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.slot-row .sr-empty {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.slot-row .sr-rating {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.squad-footer {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.team-preview {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  text-align: center;
+  min-height: 18px;
+}
+
+/* PICK PANE */
+.spin-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.spin-controls .btn {
+  flex: 1;
+  min-width: 120px;
+  max-width: none;
+  padding: 12px 10px;
+  font-size: 0.85rem;
+}
+.pick-content { min-height: 160px; }
+.pick-empty {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 50px 10px;
+}
+.pick-row .pr-meta .squad-tag {
+  color: var(--legend);
+}
+.picker-search {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.picker-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pick-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.pick-row:active { background: var(--bg-card-hover); }
+.pick-row .pr-left {
+  display: flex;
+  flex-direction: column;
+}
+.pick-row .pr-name { font-weight: 700; font-size: 0.9rem; }
+.pick-row .pr-meta { font-size: 0.72rem; color: var(--text-dim); }
+.pick-row .pr-rating {
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.pick-row.taken {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* RESULT LOG (used by the end screen's full match log) */
+.result-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border-left: 3px solid var(--win);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+}
+.result-row.loss { border-left-color: var(--loss); }
+.result-row .rr-tag {
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+.result-row.win .rr-tag { color: var(--win); }
+.result-row.loss .rr-tag { color: var(--loss); }
+
+/* END */
+.end-panel { text-align: center; }
+#end-title { font-size: 1.6rem; margin-bottom: 4px; }
+#end-subtitle { color: var(--text-dim); margin-bottom: 16px; }
+.end-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+@media (min-width: 400px) {
+  .slots { grid-template-columns: repeat(3, 1fr); }
+}

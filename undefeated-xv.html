@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239B3D36'/><text x='16' y='22' font-family='DM Sans,sans-serif' font-size='13' font-weight='700' fill='white' text-anchor='middle'>MT</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undefeated XV — Marcus Thuillier</title>
+  <meta name="description" content="Undefeated XV — a rugby roster-drafting browser game built on real Rugby World Cup history, 1987–2023. Spin for a real nation and year, draft real players, and take your all-time XV through a real World Cup 2027 draw or a real past tournament." />
+  <meta property="og:title" content="Undefeated XV — Marcus Thuillier" />
+  <meta property="og:description" content="A rugby roster-drafting game built entirely on real, sourced World Cup data — 3,897 real players across 10 tournaments, real ratings, real opponents." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="career.html" class="nav-link">Career</a>
+        <a href="horizon.html" class="nav-link">Horizon Media</a>
+        <a href="intel.html" class="nav-link">Intel</a>
+        <a href="nyu.html" class="nav-link">NYU MBA</a>
+        <a href="northwestern.html" class="nav-link">Northwestern MLDS</a>
+        <a href="lab.html" class="nav-link">In the Lab</a>
+        <a href="undefeated-xv.html" class="nav-link active">Undefeated XV</a>
+        <a href="assets/cv.pdf" class="nav-link" download>CV ↓</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- BANNER -->
+  <div class="banner banner--inner banner--undefeated"></div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-title">Undefeated XV</div>
+    <div class="page-subtitle">A rugby roster-drafting game built entirely on real Rugby World Cup history — every player, every squad, every rating traces to a sourced, verifiable fact. No invented players, no invented stats.</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-section">
+
+    <div class="mini-metrics fade-in">
+      <div class="mini-metric">
+        <div class="mini-metric-value">3,897</div>
+        <div class="mini-metric-label">Real Players</div>
+      </div>
+      <div class="mini-metric">
+        <div class="mini-metric-value">1987–2023</div>
+        <div class="mini-metric-label">10 World Cups</div>
+      </div>
+      <div class="mini-metric">
+        <div class="mini-metric-value">3</div>
+        <div class="mini-metric-label">Game Modes</div>
+      </div>
+      <div class="mini-metric">
+        <div class="mini-metric-value">9</div>
+        <div class="mini-metric-label">Sourced Achievement Datasets</div>
+      </div>
+    </div>
+
+    <div class="section-heading fade-in">Play it</div>
+    <div class="section-subheading">Runs entirely in the browser — no login, no download.</div>
+
+    <div class="play-frame-wrap fade-in">
+      <div class="play-frame-bar">
+        <span class="play-frame-label">Undefeated XV</span>
+        <a class="play-frame-open" href="undefeated-xv/index.html" target="_blank" rel="noopener">Open full screen ↗</a>
+      </div>
+      <iframe class="play-frame" src="undefeated-xv/index.html" title="Undefeated XV" loading="lazy"></iframe>
+    </div>
+
+    <div class="section-heading fade-in" style="margin-top:2.5rem;">How it works</div>
+
+    <div class="ai-projects fade-in">
+      <div class="ai-project-card">
+        <div class="ai-project-label">The Draft</div>
+        <div class="ai-project-title">Spin for a real nation and year, draft a real player</div>
+        <div class="ai-project-desc">
+          Hit "Respin all" and the game lands on a real national squad from a real World Cup — New Zealand 1987, South Africa 1995, England 2003. Pick anyone from that squad to fill an open position, then spin again for the next one. Every pick comes from its own fresh spin, so a run can mix a 1987 prop with a 2019 fly-half. Players from the same nation, or who were literally on the same World Cup squad, build chemistry together.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Vanilla JS</span>
+          <span class="tag">No Build Step</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">Three Ways to Play</div>
+        <div class="ai-project-title">Test Campaign · Rugby World Cup 2027 · History Mode</div>
+        <div class="ai-project-desc">
+          <strong>Test Campaign</strong> plays a full 14-match season against real nations seeded on their real current Elo — no elimination, the final record is what matters. <strong>Rugby World Cup 2027</strong> drops your XV into a real pool from the actual next tournament's draw (first-ever 24-team/6-pool format), simulates the other five pools in the background, and routes you through a real bracket using World Rugby's own confirmed Round of 16 pairing rule. <strong>History Mode</strong> does the same for any past World Cup — your XV replaces one real team in a real pool and plays out a real run through that year's actual bracket, using each opponent's real Elo as it stood right before that specific tournament.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Real Bracket Simulation</span>
+          <span class="tag">Point-in-Time Elo</span>
+        </div>
+      </div>
+
+      <div class="ai-project-card">
+        <div class="ai-project-label">The Ratings</div>
+        <div class="ai-project-title">Every rating traces to a real, cited source</div>
+        <div class="ai-project-desc">
+          A two-stage model: real match-impact ratings (2018–2025) from a companion <a href="https://github.com/marcusthuillier/Rugby_Work" target="_blank" rel="noopener" class="inline-link">Player Impact Model</a> for modern players, plus a fully sourced achievement layer for every other era — World Cup wins, World Rugby Player of the Year, Hall of Fame, World Cup captaincy, British &amp; Irish Lions selection, each nation's own all-time records, individual World Cup records, regional titles (Rugby Europe, Pacific Nations Cup, Rugby Africa Cup, South American Championship), and both the 2003 World Cup's officially-published "team of the Tournament" and World Rugby's real annual Dream Team of the Year.
+        </div>
+        <div class="ai-project-desc" style="margin-top:0.6rem;">
+          Ranked separately within a production tier and an achievement-only tier, then mapped onto the same bell curve — so a squad drafted entirely from 1987 can compete fairly against one drafted entirely from 2019, on average, rather than one era structurally outranking the other.
+        </div>
+        <div class="card-tags" style="margin-top:0.8rem;">
+          <span class="tag">Python</span>
+          <span class="tag">Wikipedia-Sourced</span>
+          <span class="tag">Percentile Ranking</span>
+          <span class="tag">Era-Fairness Tested</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading fade-in" style="margin-top:2.5rem;">Source</div>
+    <div class="ai-project-desc fade-in">
+      Full data pipeline, rating methodology, and known limitations are documented in the
+      <a href="https://github.com/marcusthuillier/Rugby_Work/tree/main/Undefeated%20XV" target="_blank" rel="noopener" class="inline-link">GitHub repo ↗</a>.
+      Part of the same <a href="https://github.com/marcusthuillier/Rugby_Work" target="_blank" rel="noopener" class="inline-link">Rugby_Work ↗</a> project as the
+      <a href="lab.html" class="inline-link">EloR rating system and match prediction model</a>.
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>Marcus Thuillier · Data Scientist &amp; Product Analyst · New York</div>
+    <div class="footer-links">
+      <a href="mailto:marcus.thuillier@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/marcusthuillier" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/marcusthuillier" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="ai-built-note">© 2026 Marcus Thuillier</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

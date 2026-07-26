@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1785042600">
+<link rel="stylesheet" href="style.css?v=1785086459">
 </head>
 <body>
 
@@ -22,15 +22,19 @@
   <section id="screen-home" class="screen">
     <div class="home-inner">
       <h1 class="logo">UNDEFEATED<span>XV</span></h1>
-      <p class="tagline">Spin for a random nation and World Cup, pick a player from that real squad. Repeat until your XV is full.<br>Can they survive a full test season unbeaten?</p>
+      <p class="tagline">Spin for a random nation and World Cup, pick a player from that real squad. Repeat until your XV is full.<br>Then pick how you want to test them.</p>
+      <label class="stats-toggle">
+        <input type="checkbox" id="toggle-stats" checked>
+        <span class="stats-toggle-track"><span class="stats-toggle-thumb"></span></span>
+        <span class="stats-toggle-label" id="toggle-stats-label">See the stats</span>
+      </label>
       <button id="btn-start" class="btn btn-primary">Start the draft</button>
-      <button id="btn-history" class="btn btn-gold">📜 History Mode</button>
       <button id="btn-ratings" class="btn btn-ghost">Browse player ratings</button>
       <button id="btn-how" class="btn btn-ghost">How it works</button>
     </div>
   </section>
 
-  <!-- HISTORY MODE: YEAR PICKER -->
+  <!-- WORLD CUP: YEAR PICKER (reached after the draft, once your XV is full) -->
   <section id="screen-history-year" class="screen hidden">
     <header class="draft-header">
       <h2>Pick a World Cup</h2>
@@ -39,7 +43,8 @@
     <p class="pick-empty" style="padding:0 0 16px;text-align:left;">
       Your XV drops into a real pool from that tournament, replacing one of its
       real teams — then plays a real run through the actual bracket that
-      unfolds from there, real opponents and all.
+      unfolds from there, real opponents and all. 1987–2023 are real history;
+      2027 is the real draw for the tournament that hasn't been played yet.
     </p>
     <div id="history-year-list" class="picker-list"></div>
   </section>
@@ -60,10 +65,11 @@
       <h2>How it works</h2>
       <ol class="how-list">
         <li><strong>Fill 10 positions.</strong> Prop, Hooker, Lock, Flanker, Number 8, Scrum-half, Fly-half, Centre, Wing, Fullback.</li>
+        <li><strong>See the stats, or don't.</strong> Toggle "See the stats" off before you start and you'll draft blind — no ratings shown, players listed alphabetically instead of best-first.</li>
         <li><strong>Spin.</strong> Hit the spin button and the game randomly lands on a real nation's squad from a real World Cup (New Zealand 1987, South Africa 1995, England 2003...). Not happy with it? Spin again, no limit.</li>
         <li><strong>Pick a player.</strong> Choose anyone from that squad who still has an open slot in your XV. Spin again for the next one. Repeat until all 10 are filled, mixing nations and decades however it lands.</li>
         <li><strong>Build chemistry.</strong> Players from the same nation link up, and players who were literally on the same World Cup squad link up even harder.</li>
-        <li><strong>Pick a mode:</strong> a 14-match Test Campaign (plays out in full — final record is what matters, one loss doesn't end it); Rugby World Cup 2027 (drops your XV into a real pool from the actual next tournament's draw, then a real simulated run through the real bracket structure — one loss ends it); or History Mode (pick a real past World Cup, drop into a real pool from it, and play a real run through that year's actual bracket, real opponents at every stage — one loss ends it).</li>
+        <li><strong>Then pick a mode</strong> — once your XV is full: <strong>Regular Competition</strong> (all 24 real nations that qualified for the 2027 World Cup, in order, no elimination — perfect is 24-0); <strong>World Cup</strong> (pick any tournament, 1987 through the real 2027 draw, and play a real run through that year's actual bracket — one loss ends it); or <strong>Gauntlet</strong> (the 10 highest real Elo team-seasons ever recorded, back to back — one loss ends it).</li>
       </ol>
       <button class="btn btn-primary" id="btn-how-back">Back</button>
     </div>
@@ -94,9 +100,11 @@
         <div id="slots" class="slots-list"></div>
         <div class="squad-footer">
           <div id="team-preview" class="team-preview"></div>
-          <button id="btn-start-test" class="btn btn-primary hidden">Enter Test Campaign</button>
-          <button id="btn-start-worldcup" class="btn btn-primary btn-gold hidden">Enter Rugby World Cup 2027</button>
-          <button id="btn-start-history" class="btn btn-primary btn-gold hidden">Enter Campaign</button>
+          <div id="mode-buttons" class="mode-buttons hidden">
+            <button id="btn-mode-regular" class="btn btn-primary">Regular Competition</button>
+            <button id="btn-mode-worldcup" class="btn btn-primary btn-gold">World Cup</button>
+            <button id="btn-mode-gauntlet" class="btn btn-primary btn-gold">🔥 Gauntlet</button>
+          </div>
         </div>
       </div>
     </div>
@@ -117,6 +125,6 @@
 
 </div>
 
-<script src="main.js?v=1785036277"></script>
+<script src="main.js?v=1785086459"></script>
 </body>
 </html>

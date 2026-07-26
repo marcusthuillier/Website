@@ -46,11 +46,10 @@
   let slots = FORMATION.map((f) => ({ ...f, player: null }));
   let currentSpinEra = null; // the (nation, year) the last spin landed on
   let usedChange = false;    // "Change date"/"Change team" — one adjustment per landed spin
-  let opponents = [];
-  let NATION_ELO = {};       // nation -> real current Elo, merged from opponents.json + rwc2027.json
-  let draftEntryMode = "normal"; // "normal" | "history"
-  let historyYear = null;
-  let campaign = { mode: "test", title: "", round: 0, wins: 0, losses: 0, log: [], series: [], teamElo: 0, teamRating: 0 };
+  let NATION_ELO = {};       // nation -> real current Elo, from rwc2027.json
+  let blindMode = false;     // "no stats": ratings hidden, pick lists alphabetical
+  let historyYear = null;    // set only once "World Cup" mode's year picker is used, post-draft
+  let campaign = { mode: "regular", title: "", round: 0, wins: 0, losses: 0, log: [], series: [], teamElo: 0, teamRating: 0 };
 
   // ---------- DOM ----------
   const $ = (id) => document.getElementById(id);
@@ -71,22 +70,19 @@
 
   // ---------- Data loading ----------
   async function loadData() {
-    const [playersRes, erasRes, opponentsRes, historyRes, eloRes, rwc2027Res] = await Promise.all([
+    const [playersRes, erasRes, historyRes, eloRes, rwc2027Res] = await Promise.all([
       fetch("data/players_master.json"),
       fetch("data/team_eras.json"),
-      fetch("data/opponents.json"),
       fetch("data/rwc_history.json"),
       fetch("data/historical_elo.json"),
       fetch("data/rwc2027.json"),
     ]);
     PLAYERS = await playersRes.json();
     TEAM_ERAS = await erasRes.json();
-    opponents = await opponentsRes.json();
     RWC_HISTORY = await historyRes.json();
     HISTORICAL_ELO = await eloRes.json();
     RWC2027 = await rwc2027Res.json();
 
-    opponents.forEach((o) => { NATION_ELO[o.nation] = o.elo; });
     Object.values(RWC2027.pools).flat().forEach((t) => { NATION_ELO[t.nation] = t.elo; });
   }
 
@@ -109,7 +105,7 @@
         <div class="sr-body">
           <div class="sr-name">${flagFor(p.nation)} ${p.display_name || p.name}</div>
         </div>
-        <div class="sr-rating">${p.rating}</div>
+        ${blindMode ? "" : `<div class="sr-rating">${p.rating}</div>`}
       `;
       if (clickable) {
         row.title = "Tap to clear this pick";
@@ -150,13 +146,7 @@
     const filled = slots.filter((s) => s.player).length;
     const full = filled === FORMATION.length;
     $("draft-progress").textContent = `${filled} / ${FORMATION.length}`;
-    const isHistory = draftEntryMode === "history";
-    $("btn-start-test").classList.toggle("hidden", !full || isHistory);
-    $("btn-start-worldcup").classList.toggle("hidden", !full || isHistory);
-    $("btn-start-history").classList.toggle("hidden", !full || !isHistory);
-    if (isHistory && full) {
-      $("btn-start-history").textContent = `Enter ${historyYear} Campaign`;
-    }
+    $("mode-buttons").classList.toggle("hidden", !full);
     updateSpinButtonStates();
     updateTeamPreview();
   }
@@ -175,6 +165,10 @@
     const preview = $("team-preview");
     if (filled.length === 0) {
       preview.textContent = "";
+      return;
+    }
+    if (blindMode) {
+      preview.textContent = `${filled.length}/${FORMATION.length} filled`;
       return;
     }
     const { teamRating } = computeTeam();
@@ -256,7 +250,9 @@
         return p ? { ...p, position: r.position } : null;
       })
       .filter(Boolean)
-      .sort((a, b) => b.rating - a.rating);
+      .sort(blindMode
+        ? (a, b) => (a.display_name || a.name).localeCompare(b.display_name || b.name)
+        : (a, b) => b.rating - a.rating);
 
     content.innerHTML = "";
     const heading = document.createElement("div");
@@ -278,7 +274,7 @@
           <div class="pr-name">${flagFor(p.nation)} ${p.display_name || p.name}</div>
           <div class="pr-meta">${p.position} · ${p.nation} <span class="squad-tag">· ${years}</span></div>
         </div>
-        <div class="pr-rating">${p.rating}</div>
+        ${blindMode ? "" : `<div class="pr-rating">${p.rating}</div>`}
       `;
       row.addEventListener("click", () => {
         const slot = slots.find((s) => !s.player && s.pos === p.position);
@@ -440,8 +436,30 @@
   }
 
   // ---------- Campaign series builders ----------
-  function buildTestSeries() {
-    return opponents.map((o, i) => ({ ...o, roundLabel: `Round ${i + 1}` }));
+  // Regular Competition: every one of the 24 real nations that qualified
+  // for the 2027 World Cup, in order (weakest real Elo first) — a full
+  // season, no elimination. Perfect is 24-0.
+  function buildRegularSeries() {
+    const teams = Object.values(RWC2027.pools).flat().slice();
+    teams.sort((a, b) => a.elo - b.elo);
+    return teams.map((o, i) => ({ ...o, roundLabel: `Match ${i + 1} of ${teams.length}` }));
+  }
+
+  // Gauntlet: the 10 highest real Elo (nation, year) team-seasons ever
+  // recorded in the historical dataset (1987-2023) — the actual toughest
+  // teams that have ever existed (1999 New Zealand, 2023 Ireland, etc.),
+  // not just today's top 10 nations. Played weakest-of-the-ten first; one
+  // loss ends the run.
+  function buildGauntletSeries() {
+    const entries = [];
+    Object.entries(HISTORICAL_ELO).forEach(([year, byNation]) => {
+      Object.entries(byNation).forEach(([nation, elo]) => {
+        entries.push({ nation, year, elo });
+      });
+    });
+    entries.sort((a, b) => b.elo - a.elo);
+    const top10 = entries.slice(0, 10).sort((a, b) => a.elo - b.elo);
+    return top10.map((o, i) => ({ ...o, roundLabel: `Gauntlet ${i + 1} of 10 · ${o.year}` }));
   }
 
   // ---------- Campaign screen ----------
@@ -449,10 +467,10 @@
     const { teamElo, teamRating } = computeTeam();
     campaign = { mode, title: "", round: 0, wins: 0, losses: 0, log: [], series: [], teamElo, teamRating };
 
-    if (mode === "test") {
-      campaign.title = "Test Campaign";
-      campaign.series = buildTestSeries();
-      // A 14-match season isn't a knockout with per-round suspense — simulate
+    if (mode === "regular") {
+      campaign.title = "Regular Competition";
+      campaign.series = buildRegularSeries();
+      // A full season isn't a knockout with per-round suspense — simulate
       // the whole thing at once and jump straight to the final record.
       campaign.series.forEach((opp) => {
         const result = simulateMatch(teamElo, opp.elo);
@@ -462,6 +480,22 @@
       campaign.round = campaign.series.length - 1;
       endCampaign(campaign.losses === 0);
       return;
+    }
+
+    if (mode === "gauntlet") {
+      campaign.title = "Gauntlet";
+      campaign.series = buildGauntletSeries();
+      for (const opp of campaign.series) {
+        const result = simulateMatch(teamElo, opp.elo);
+        campaign.log.push({ nation: opp.nation, ...result, roundLabel: opp.roundLabel });
+        if (result.won) {
+          campaign.wins += 1;
+        } else {
+          campaign.losses += 1;
+          return endCampaign(false);
+        }
+      }
+      return endCampaign(true);
     }
 
     if (mode === "worldcup") {
@@ -746,37 +780,82 @@
         subtitle.textContent = campaign.losses === 0
           ? `Your XV won the Rugby World Cup ${campaign.wins}-0, unbeaten.`
           : `Your XV won the Rugby World Cup, finishing ${campaign.wins}-${campaign.losses} — a pool-stage loss didn't stop the run.`;
+      } else if (campaign.mode === "gauntlet") {
+        title.textContent = "GAUNTLET CLEARED";
+        title.style.color = "var(--win)";
+        subtitle.textContent = `Your XV beat all 10 of the highest Elo team-seasons ever recorded, ${campaign.wins}-0.`;
       } else {
         title.textContent = "UNDEFEATED";
         title.style.color = "var(--win)";
-        subtitle.textContent = `Your XV went ${campaign.wins}-0 through the full test campaign.`;
+        subtitle.textContent = `Your XV went ${campaign.wins}-0 through every real 2027 World Cup qualifier.`;
       }
     } else if (reason === "pool") {
       title.textContent = "DIDN'T ADVANCE";
       title.style.color = "var(--loss)";
       subtitle.textContent = `Your XV finished pool play ${campaign.wins}-${campaign.losses} and missed the knockout stage.`;
-    } else if (campaign.mode === "test") {
+    } else if (campaign.mode === "regular") {
       const good = campaign.wins >= campaign.losses;
       title.textContent = "CAMPAIGN COMPLETE";
       title.style.color = good ? "var(--win)" : "var(--loss)";
-      subtitle.textContent = `Your XV finished the test campaign ${campaign.wins}-${campaign.losses}.`;
+      subtitle.textContent = `Your XV finished the regular competition ${campaign.wins}-${campaign.losses}.`;
+    } else if (campaign.mode === "gauntlet") {
+      title.textContent = "GAUNTLET OVER";
+      title.style.color = "var(--loss)";
+      const lastRound = campaign.log.length ? campaign.log[campaign.log.length - 1].roundLabel : "";
+      subtitle.textContent = `Your gauntlet run ended at ${lastRound}, finishing ${campaign.wins}-${campaign.losses}.`;
     } else {
       title.textContent = "RUN OVER";
       title.style.color = "var(--loss)";
       const lastRound = campaign.log.length ? campaign.log[campaign.log.length - 1].roundLabel : "";
       subtitle.textContent = `Your unbeaten run ended at ${lastRound}, finishing ${campaign.wins}-${campaign.losses}.`;
     }
-    const el = $("end-log");
-    el.innerHTML = "";
-    campaign.log.forEach((entry) => {
-      const row = document.createElement("div");
-      row.className = "result-row " + (entry.won ? "win" : "loss");
-      row.innerHTML = `
-        <span class="rr-tag">${entry.won ? "Win" : "Loss"}</span>
-        <span>Your XV vs ${flagFor(entry.nation)} ${entry.nation}</span>
-        <span>${entry.myScore}–${entry.oppScore}</span>
-      `;
-      el.appendChild(row);
+    renderNarrativeLog($("end-log"), campaign.log);
+  }
+
+  function appendResultRow(container, entry) {
+    const row = document.createElement("div");
+    row.className = "result-row " + (entry.won ? "win" : "loss");
+    row.innerHTML = `
+      <span class="rr-tag">${entry.won ? "Win" : "Loss"}</span>
+      <span>Your XV vs ${flagFor(entry.nation)} ${entry.nation}</span>
+      <span>${entry.myScore}–${entry.oppScore}</span>
+    `;
+    container.appendChild(row);
+  }
+
+  function appendNarrative(container, text) {
+    const div = document.createElement("div");
+    div.className = "log-narrative";
+    div.textContent = text;
+    container.appendChild(div);
+  }
+
+  // World Cup / History Mode results read as a story — the pool draw
+  // announced up front, then each knockout opponent named before the
+  // result that follows it — rather than a flat list of scores with no
+  // sense of what tournament shape produced them. Regular Competition and
+  // Gauntlet have no pool/bracket structure, so they stay a flat list.
+  function renderNarrativeLog(container, log) {
+    container.innerHTML = "";
+    const isBracketMode = log.length > 0 && /^Pool /.test(log[0].roundLabel || "");
+    if (!isBracketMode) {
+      log.forEach((entry) => appendResultRow(container, entry));
+      return;
+    }
+
+    const poolEntries = log.filter((e) => /^Pool /.test(e.roundLabel));
+    const knockoutEntries = log.filter((e) => !/^Pool /.test(e.roundLabel));
+
+    if (poolEntries.length) {
+      const poolLetter = poolEntries[0].roundLabel.match(/^Pool (\S+)/)[1];
+      const oppNames = poolEntries.map((e) => `${flagFor(e.nation)} ${e.nation}`).join(", ");
+      appendNarrative(container, `You were drawn into Pool ${poolLetter}, with ${oppNames}.`);
+      poolEntries.forEach((entry) => appendResultRow(container, entry));
+    }
+
+    knockoutEntries.forEach((entry) => {
+      appendNarrative(container, `${entry.roundLabel}: ${flagFor(entry.nation)} ${entry.nation}`);
+      appendResultRow(container, entry);
     });
   }
 
@@ -786,26 +865,35 @@
     return `Undefeated XV: ${record}\n${lines.join("")}\nBuild your own XV.`;
   }
 
-  // ---------- History Mode: year picker ----------
+  // ---------- World Cup mode: year picker (1987-2027) ----------
+  // Reached from the completed draft screen's "World Cup" button — the
+  // squad is already built, so picking a year starts the campaign directly
+  // rather than resetting anything.
   function renderHistoryYearList() {
     const list = $("history-year-list");
     list.innerHTML = "";
-    Object.keys(RWC_HISTORY).sort((a, b) => a - b).forEach((year) => {
-      const h = RWC_HISTORY[year];
+    const years = [...Object.keys(RWC_HISTORY).sort((a, b) => a - b), "2027"];
+    years.forEach((year) => {
+      const isFuture = year === "2027";
       const row = document.createElement("div");
       row.className = "pick-row";
+      const meta = isFuture
+        ? "The real draw — hasn't been played yet"
+        : `Won by ${flagFor(RWC_HISTORY[year].champion)} ${RWC_HISTORY[year].champion}`;
       row.innerHTML = `
         <div class="pr-left">
           <div class="pr-name">${year} Rugby World Cup</div>
-          <div class="pr-meta">Won by ${flagFor(h.champion)} ${h.champion}</div>
+          <div class="pr-meta">${meta}</div>
         </div>
         <div class="pr-rating">›</div>
       `;
       row.addEventListener("click", () => {
-        historyYear = year;
-        draftEntryMode = "history";
-        resetDraft();
-        showScreen("draft");
+        if (isFuture) {
+          startCampaign("worldcup");
+        } else {
+          historyYear = year;
+          startCampaign("history");
+        }
       });
       list.appendChild(row);
     });
@@ -822,17 +910,16 @@
 
   // ---------- Wiring ----------
   function wireEvents() {
+    $("toggle-stats").addEventListener("change", (e) => {
+      $("toggle-stats-label").textContent = e.target.checked ? "See the stats" : "No stats";
+    });
     $("btn-start").addEventListener("click", () => {
-      draftEntryMode = "normal";
+      blindMode = !$("toggle-stats").checked;
       historyYear = null;
       resetDraft();
       showScreen("draft");
     });
-    $("btn-history").addEventListener("click", () => {
-      renderHistoryYearList();
-      showScreen("historyYear");
-    });
-    $("btn-history-back").addEventListener("click", () => showScreen("home"));
+    $("btn-history-back").addEventListener("click", () => showScreen("draft"));
     $("btn-how").addEventListener("click", () => showScreen("how"));
     $("btn-how-back").addEventListener("click", () => showScreen("home"));
     $("btn-ratings").addEventListener("click", () => {
@@ -844,9 +931,12 @@
     $("btn-spin-all").addEventListener("click", spinAll);
     $("btn-spin-date").addEventListener("click", spinChangeDate);
     $("btn-spin-team").addEventListener("click", spinChangeTeam);
-    $("btn-start-test").addEventListener("click", () => startCampaign("test"));
-    $("btn-start-worldcup").addEventListener("click", () => startCampaign("worldcup"));
-    $("btn-start-history").addEventListener("click", () => startCampaign("history"));
+    $("btn-mode-regular").addEventListener("click", () => startCampaign("regular"));
+    $("btn-mode-gauntlet").addEventListener("click", () => startCampaign("gauntlet"));
+    $("btn-mode-worldcup").addEventListener("click", () => {
+      renderHistoryYearList();
+      showScreen("historyYear");
+    });
     $("btn-restart").addEventListener("click", () => showScreen("home"));
     $("btn-copy").addEventListener("click", async () => {
       try {

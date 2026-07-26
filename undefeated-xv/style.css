@@ -1,18 +1,24 @@
 :root {
-  --bg: #0b1710;
-  --bg-panel: #12241a;
-  --bg-card: #17301f;
-  --bg-card-hover: #1f3d28;
-  --line: #2a4a34;
-  --text: #f2f5f0;
-  --text-dim: #9fb3a5;
-  --accent: #d9a441;
-  --accent-dim: #8a6a2a;
-  --win: #3fa85c;
-  --loss: #c74b3f;
-  --legend: #b98bd6;
+  --bg: #f0eeea;
+  --bg-panel: #faf9f7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f3ef;
+  --line: #d9d3c8;
+  --text: #1c2a3a;
+  --text-dim: #6b7a8d;
+  --accent: #9B3D36;
+  --accent-light: #B85C52;
+  --accent-dim: #ddc0bd;
+  --accent-warm: #b8924a;
+  --win: #3f7a4a;
+  --loss: #8a332c;
+  --legend: #b8924a;
+  --shadow-sm: 0 1px 3px rgba(28, 42, 58, 0.06);
+  --shadow-md: 0 4px 16px rgba(28, 42, 58, 0.08);
   --radius: 14px;
   --max-w: 480px;
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -22,7 +28,7 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
@@ -61,6 +67,7 @@ html, body {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
+  box-shadow: var(--shadow-sm);
 }
 .squad-pane {
   flex: 1 1 42%;
@@ -85,10 +92,11 @@ html, body {
   gap: 14px;
 }
 .logo {
+  font-family: var(--font-display);
   font-size: 2.4rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
 }
 .logo span { color: var(--accent); }
 .tagline {
@@ -98,6 +106,7 @@ html, body {
 }
 
 .btn {
+  font-family: var(--font-body);
   border: none;
   border-radius: 999px;
   padding: 14px 28px;
@@ -109,15 +118,14 @@ html, body {
 }
 .btn-primary {
   background: var(--accent);
-  color: #1a1206;
+  color: #fdfaf6;
 }
 .btn-primary:disabled {
   background: var(--accent-dim);
-  color: #6b5c3f;
-  cursor: not-allowed;
+  color: #9a7c79;
 }
 .btn:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 .btn-ghost {
@@ -126,19 +134,21 @@ html, body {
   border: 1px solid var(--line);
 }
 .btn-gold {
-  background: linear-gradient(135deg, #f0c869, var(--accent));
+  background: linear-gradient(135deg, #d8b877, var(--accent-warm));
+  color: #2a1f0d;
 }
 .btn-spin {
   font-size: 1.05rem;
-  box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.18);
+  box-shadow: 0 0 0 3px rgba(155, 61, 54, 0.14);
 }
 .spin-era-heading {
   text-align: center;
   padding: 4px 2px 14px;
 }
 .spin-era-heading .se-name {
+  font-family: var(--font-display);
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 .spin-era-heading .se-sub {
   font-size: 0.8rem;
@@ -152,6 +162,7 @@ html, body {
   padding: 6px 14px;
   font-size: 0.8rem;
   cursor: pointer;
+  font-family: var(--font-body);
 }
 .ratings-list {
   max-height: 80vh;
@@ -163,6 +174,7 @@ html, body {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 20px;
+  box-shadow: var(--shadow-sm);
 }
 .how-list {
   color: var(--text-dim);
@@ -179,7 +191,7 @@ html, body {
   align-items: center;
   margin-bottom: 12px;
 }
-.draft-header h2 { margin: 0; }
+.draft-header h2 { margin: 0; font-family: var(--font-display); }
 .draft-progress {
   background: var(--bg-card);
   border: 1px solid var(--line);
@@ -188,6 +200,7 @@ html, body {
   font-weight: 700;
   color: var(--accent);
   font-size: 0.9rem;
+  font-family: var(--font-body);
 }
 
 /* Squad pane: a real team-sheet layout — front row, second row, back row,
@@ -218,9 +231,10 @@ html, body {
   padding: 12px;
   cursor: pointer;
   min-height: 30px;
+  box-shadow: var(--shadow-sm);
 }
 .slot-row:active { background: var(--bg-card-hover); }
-.slot-row.filled { border-color: var(--accent-dim); }
+.slot-row.filled { border-color: var(--accent-light); }
 .slot-row .sr-pos {
   font-size: 0.66rem;
   color: var(--text-dim);
@@ -241,9 +255,10 @@ html, body {
   font-style: italic;
 }
 .slot-row .sr-rating {
+  font-family: var(--font-display);
   color: var(--accent);
-  font-weight: 800;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .squad-footer {
@@ -290,6 +305,7 @@ html, body {
   background: var(--bg-card);
   color: var(--text);
   font-size: 0.9rem;
+  font-family: var(--font-body);
 }
 .picker-list {
   overflow-y: auto;
@@ -306,6 +322,7 @@ html, body {
   border-radius: 10px;
   padding: 10px 12px;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 .pick-row:active { background: var(--bg-card-hover); }
 .pick-row .pr-left {
@@ -315,12 +332,13 @@ html, body {
 .pick-row .pr-name { font-weight: 700; font-size: 0.9rem; }
 .pick-row .pr-meta { font-size: 0.72rem; color: var(--text-dim); }
 .pick-row .pr-rating {
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   color: var(--accent);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 .pick-row.taken {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -337,10 +355,12 @@ html, body {
   justify-content: space-between;
   align-items: center;
   background: var(--bg-card);
+  border: 1px solid var(--line);
   border-left: 3px solid var(--win);
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 0.82rem;
+  box-shadow: var(--shadow-sm);
 }
 .result-row.loss { border-left-color: var(--loss); }
 .result-row .rr-tag {
@@ -353,7 +373,7 @@ html, body {
 
 /* END */
 .end-panel { text-align: center; }
-#end-title { font-size: 1.6rem; margin-bottom: 4px; }
+#end-title { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 4px; }
 #end-subtitle { color: var(--text-dim); margin-bottom: 16px; }
 .end-actions {
   display: flex;

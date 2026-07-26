@@ -238,6 +238,13 @@
 
     const era = currentSpinEra;
     const playersByName = new Map(PLAYERS.map((p) => [p.name, p]));
+    // A multi-position player (e.g. Pieter-Steph du Toit, eligible at
+    // Flanker/Lock/Number 8) shows up in era.roster once per eligible
+    // position — once they're in the squad under ONE of those, they must
+    // not also be pickable into a different still-open slot.
+    const alreadyPicked = new Set(
+      slots.filter((s) => s.player).map((s) => `${s.player.name}|${s.player.nation}`)
+    );
 
     // Override with the era-specific position (r.position), not the player's
     // global primary position — a player can be eligible here under a
@@ -251,6 +258,7 @@
         return p ? { ...p, position: r.position } : null;
       })
       .filter(Boolean)
+      .filter((p) => !alreadyPicked.has(`${p.name}|${p.nation}`))
       .sort(blindMode
         ? (a, b) => (a.display_name || a.name).localeCompare(b.display_name || b.name)
         : (a, b) => b.rating - a.rating);
@@ -699,7 +707,25 @@
   function simulateRealHistoryYear() {
     const t = RWC_HISTORY[historyYear];
     const eloMap = HISTORICAL_ELO[historyYear] || {};
-    const eloOf = (nation) => eloMap[nation] ?? 1350; // untracked nation (e.g. Ivory Coast)
+    // Real Elo has drifted upward across the professional era — 1987's
+    // tracked field averages ~1737, 2023's ~1876, purely from how the
+    // rating pool/methodology evolved, not because 1987 sides were
+    // objectively worse. Your own drafted squad's Elo is always derived the
+    // same era-agnostic way (see ELO_REF_VALUE/computeTeam), so left
+    // uncorrected, an average squad already carries a built-in ~100+ point
+    // edge in an earlier year that it wouldn't have in a recent one — 1987
+    // plays meaningfully easier than 2023 for the exact same drafted XV.
+    // Shifting this year's whole field so its mean lands on ELO_REF_VALUE
+    // (the same reference your own team-Elo conversion assumes) equalizes
+    // difficulty across years while leaving each year's REAL relative
+    // rankings (who was actually the best team that year) untouched. Scoped
+    // to this lookup only, not HISTORICAL_ELO itself — Gauntlet mode
+    // deliberately wants the real, undistorted historical Elo to identify
+    // the genuine best team-seasons ever, drift included.
+    const yearEloValues = Object.values(eloMap);
+    const yearMean = yearEloValues.reduce((a, b) => a + b, 0) / (yearEloValues.length || 1);
+    const eloShift = ELO_REF_VALUE - yearMean;
+    const eloOf = (nation) => (eloMap[nation] ?? 1350) + eloShift; // untracked nation (e.g. Ivory Coast) fallback shifted too
 
     const poolNames = t.pools.map((p) => p.pool);
     const myPoolLabel = poolNames[Math.floor(Math.random() * poolNames.length)];

@@ -489,7 +489,7 @@
       // elimination on a loss, you play the whole gauntlet either way.
       campaign.series.forEach((opp) => {
         const result = simulateMatch(teamElo, opp.elo);
-        campaign.log.push({ nation: opp.nation, ...result, roundLabel: opp.roundLabel });
+        campaign.log.push({ nation: opp.nation, year: opp.year, ...result, roundLabel: opp.roundLabel });
         if (result.won) campaign.wins += 1; else campaign.losses += 1;
       });
       campaign.round = campaign.series.length - 1;
@@ -813,9 +813,12 @@
   function appendResultRow(container, entry) {
     const row = document.createElement("div");
     row.className = "result-row " + (entry.won ? "win" : "loss");
+    const oppLabel = entry.year
+      ? `${entry.year} ${flagFor(entry.nation)} ${entry.nation}`
+      : `${flagFor(entry.nation)} ${entry.nation}`;
     row.innerHTML = `
       <span class="rr-tag">${entry.won ? "Win" : "Loss"}</span>
-      <span>Your XV vs ${flagFor(entry.nation)} ${entry.nation}</span>
+      <span>Your XV vs ${oppLabel}</span>
       <span>${entry.myScore}–${entry.oppScore}</span>
     `;
     container.appendChild(row);

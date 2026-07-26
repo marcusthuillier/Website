@@ -45,7 +45,8 @@
   let RWC2027 = { pools: {} }; // rwc2027.json — the real 2027 Rugby World Cup pool draw
   let slots = FORMATION.map((f) => ({ ...f, player: null }));
   let currentSpinEra = null; // the (nation, year) the last spin landed on
-  let usedChange = false;    // "Change date"/"Change team" — one adjustment per landed spin
+  let dateChangeUsed = false; // "Change date" — once per whole draft, not once per turn
+  let teamChangeUsed = false; // "Change team" — once per whole draft, not once per turn
   let NATION_ELO = {};       // nation -> real current Elo, from rwc2027.json
   let blindMode = false;     // "no stats": ratings hidden, pick lists alphabetical
   let historyYear = null;    // set only once "World Cup" mode's year picker is used, post-draft
@@ -151,13 +152,14 @@
     updateTeamPreview();
   }
 
-  // "Change date"/"Change team" are one adjustment per landed spin — once
-  // either is used, both gray out until "Respin all" lands a fresh squad.
+  // "Change date"/"Change team" are each a one-time adjustment for the whole
+  // draft, not per turn — use "Change date" on turn 2 and it's gone for good,
+  // independent of "Change team", which stays available until you use it too.
   function updateSpinButtonStates() {
     const full = slots.every((s) => s.player);
     $("btn-spin-all").disabled = full;
-    $("btn-spin-date").disabled = full || !currentSpinEra || usedChange;
-    $("btn-spin-team").disabled = full || !currentSpinEra || usedChange;
+    $("btn-spin-date").disabled = full || !currentSpinEra || dateChangeUsed;
+    $("btn-spin-team").disabled = full || !currentSpinEra || teamChangeUsed;
   }
 
   function updateTeamPreview() {
@@ -193,31 +195,30 @@
     const candidates = eraCandidates(() => true);
     if (candidates.length === 0) return;
     currentSpinEra = pickRandom(candidates);
-    usedChange = false;
     renderSlots();
     renderPickPane();
   }
 
   function spinChangeDate() {
-    if (!currentSpinEra || usedChange) return;
+    if (!currentSpinEra || dateChangeUsed) return;
     const nation = currentSpinEra.nation;
     let candidates = eraCandidates((e) => e.nation === nation && e.year !== currentSpinEra.year);
     if (candidates.length === 0) candidates = eraCandidates((e) => e.nation === nation);
     if (candidates.length === 0) return;
     currentSpinEra = pickRandom(candidates);
-    usedChange = true;
+    dateChangeUsed = true;
     updateSpinButtonStates();
     renderPickPane();
   }
 
   function spinChangeTeam() {
-    if (!currentSpinEra || usedChange) return;
+    if (!currentSpinEra || teamChangeUsed) return;
     const year = currentSpinEra.year;
     let candidates = eraCandidates((e) => e.year === year && e.nation !== currentSpinEra.nation);
     if (candidates.length === 0) candidates = eraCandidates((e) => e.year === year);
     if (candidates.length === 0) return;
     currentSpinEra = pickRandom(candidates);
-    usedChange = true;
+    teamChangeUsed = true;
     updateSpinButtonStates();
     renderPickPane();
   }
@@ -284,7 +285,6 @@
         // let you clean out multiple positions from it in a row, so
         // picking always resets to "spin again" rather than staying put.
         currentSpinEra = null;
-        usedChange = false;
         renderSlots();
         renderPickPane();
       });
@@ -448,8 +448,8 @@
   // Gauntlet: the 10 highest real Elo (nation, year) team-seasons ever
   // recorded in the historical dataset (1987-2023) — the actual toughest
   // teams that have ever existed (1999 New Zealand, 2023 Ireland, etc.),
-  // not just today's top 10 nations. Played weakest-of-the-ten first; one
-  // loss ends the run.
+  // not just today's top 10 nations. Played weakest-of-the-ten first; no
+  // elimination — you play all 10 regardless of result.
   function buildGauntletSeries() {
     const entries = [];
     Object.entries(HISTORICAL_ELO).forEach(([year, byNation]) => {
@@ -485,17 +485,16 @@
     if (mode === "gauntlet") {
       campaign.title = "Gauntlet";
       campaign.series = buildGauntletSeries();
-      for (const opp of campaign.series) {
+      // All 10 toughest team-seasons ever recorded, back to back — no
+      // elimination on a loss, you play the whole gauntlet either way.
+      campaign.series.forEach((opp) => {
         const result = simulateMatch(teamElo, opp.elo);
         campaign.log.push({ nation: opp.nation, ...result, roundLabel: opp.roundLabel });
-        if (result.won) {
-          campaign.wins += 1;
-        } else {
-          campaign.losses += 1;
-          return endCampaign(false);
-        }
-      }
-      return endCampaign(true);
+        if (result.won) campaign.wins += 1; else campaign.losses += 1;
+      });
+      campaign.round = campaign.series.length - 1;
+      endCampaign(campaign.losses === 0);
+      return;
     }
 
     if (mode === "worldcup") {
@@ -799,10 +798,9 @@
       title.style.color = good ? "var(--win)" : "var(--loss)";
       subtitle.textContent = `Your XV finished the regular competition ${campaign.wins}-${campaign.losses}.`;
     } else if (campaign.mode === "gauntlet") {
-      title.textContent = "GAUNTLET OVER";
+      title.textContent = "GAUNTLET COMPLETE";
       title.style.color = "var(--loss)";
-      const lastRound = campaign.log.length ? campaign.log[campaign.log.length - 1].roundLabel : "";
-      subtitle.textContent = `Your gauntlet run ended at ${lastRound}, finishing ${campaign.wins}-${campaign.losses}.`;
+      subtitle.textContent = `Your XV played all 10 of the highest Elo team-seasons ever recorded, finishing ${campaign.wins}-${campaign.losses}.`;
     } else {
       title.textContent = "RUN OVER";
       title.style.color = "var(--loss)";
@@ -903,7 +901,8 @@
   function resetDraft() {
     slots = FORMATION.map((f) => ({ ...f, player: null }));
     currentSpinEra = null;
-    usedChange = false;
+    dateChangeUsed = false;
+    teamChangeUsed = false;
     renderSlots();
     renderPickPane();
   }

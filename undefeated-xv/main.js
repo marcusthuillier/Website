@@ -434,7 +434,12 @@
     return mean + z * std;
   }
 
-  function simulateMatch(myElo, oppElo) {
+  // marginScale < 1 tightens the score margin without touching who wins —
+  // used for knockout-stage matches (see resolveBracketMatch), where a real
+  // team that's earned a bracket slot tends to play tighter, more
+  // error-averse rugby than a random pool mismatch would suggest, even
+  // against a big favorite.
+  function simulateMatch(myElo, oppElo, marginScale = 1) {
     const MAX_MARGIN = 50; // real test-match blowouts rarely exceed this
     // The winner is drawn directly from winProbability() — the same number
     // shown on screen — so a displayed 33% really does win ~33% of the time.
@@ -442,7 +447,7 @@
     // that didn't line up with the displayed logistic probability: a
     // displayed 33% actually won only ~21% of simulated matches.) The Elo
     // gap still drives how believable the final score margin looks, it just
-    // no longer also decides who wins.
+    // no longer also decides who wins — marginScale never touches this.
     const won = Math.random() < winProbability(myElo, oppElo);
     // Margin noise used to be Math.abs(randNormal(...)) — always POSITIVE,
     // so it only ever inflated the margin, never shrank it. That gave even
@@ -455,9 +460,15 @@
     // verified: a 200-gap match now averages a 9.7-point win (was 22.3), a
     // dead-even match averages 3.7 (was 9.0) with 88% finishing under 10,
     // and 40+ point routs stay rare (<1%) until the gap is genuinely huge
-    // (700+, e.g. a maxed-out draft against a real minnow).
-    const expectedMarginMag = clamp(Math.abs(myElo - oppElo) / 22, 0, MAX_MARGIN);
-    const marginMag = clamp(Math.round(expectedMarginMag + randNormal(0, 8)), 1, MAX_MARGIN);
+    // (700+, e.g. a maxed-out draft against a real minnow). A World Cup
+    // knockout matchup can easily HIT that kind of gap (a strong drafted
+    // squad against a real team's Elo that year), which read as
+    // unrealistic blowouts (67-29 in a Quarterfinal) for what should feel
+    // like a tense, high-stakes knockout match — marginScale=0.6 there
+    // brings a 600-gap match's average margin from 27 down to 16, and
+    // effectively zeroes out 40+ routs, without changing the win/loss odds.
+    const expectedMarginMag = clamp((Math.abs(myElo - oppElo) / 22) * marginScale, 0, MAX_MARGIN);
+    const marginMag = clamp(Math.round(expectedMarginMag + randNormal(0, 8 * marginScale)), 1, MAX_MARGIN);
     // The losing side's score used to be a FLAT 6-24 (equally likely to be
     // 6 as 24), which put too many close matches — the ones the margin fix
     // above was supposed to make competitive-looking — into unrealistic
@@ -615,7 +626,7 @@
   // real logged match (uses your real teamElo); otherwise it's a background
   // sim purely to find out who you'll face next.
   function resolveBracketMatch(a, b, roundLabel) {
-    const result = simulateMatch(a.elo, b.elo);
+    const result = simulateMatch(a.elo, b.elo, 0.6);
     const winner = result.won ? a : b; // always correct, independent of who's "you"
     if (a.isYou || b.isYou) {
       const oppRow = a.isYou ? b : a;
@@ -862,6 +873,15 @@
       title.textContent = "GAUNTLET COMPLETE";
       title.style.color = "var(--loss)";
       subtitle.textContent = `Your XV played all 10 of the highest Elo team-seasons ever recorded, finishing ${campaign.wins}-${campaign.losses}.`;
+    } else if (campaign.mode === "worldcup" || campaign.mode === "history") {
+      // A pool-stage loss doesn't end a World Cup/History Mode run (see the
+      // reachedTheEnd branches above) — only elimination does, so this text
+      // must not imply "unbeaten" was ever the bar to clear here.
+      title.textContent = "KNOCKED OUT";
+      title.style.color = "var(--loss)";
+      const lastRound = campaign.log.length ? campaign.log[campaign.log.length - 1].roundLabel : "";
+      const tournament = campaign.mode === "history" ? `${historyYear} Rugby World Cup` : "Rugby World Cup";
+      subtitle.textContent = `Your XV's ${tournament} run ended at the ${lastRound}, finishing ${campaign.wins}-${campaign.losses}.`;
     } else {
       title.textContent = "RUN OVER";
       title.style.color = "var(--loss)";
